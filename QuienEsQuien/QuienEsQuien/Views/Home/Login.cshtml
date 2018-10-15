@@ -1,0 +1,16 @@
+﻿@{
+    Layout = null;
+}
+
+@using QuienEsQuien.Models;
+@model Usuario;
+
+<h2>Login</h2><br />
+@using (Html.BeginForm("Login", "TryLogin", "Home", null, new { }))
+{
+    @Html.TextBoxFor(model => model.Nombre);
+    @Html.TextBoxFor(model => model.Contraseña);
+
+    <input type="submit" />
+
+}

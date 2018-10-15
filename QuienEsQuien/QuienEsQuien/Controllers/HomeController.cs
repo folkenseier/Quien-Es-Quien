@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using QuienEsQuien.Models;
 
 namespace QuienEsQuien.Controllers
 {
@@ -26,5 +27,13 @@ namespace QuienEsQuien.Controllers
 
             return View();
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        public ActionResult TryLogin(string Usuario, string pass)
+        {
+
+        }
+
     }
-}

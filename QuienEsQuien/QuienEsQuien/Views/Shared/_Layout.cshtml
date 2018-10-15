@@ -17,13 +17,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("QUIEN ES QUIEN", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    @{
+                        if (Session["Usuario"] == null)
+                        {
+                            <li>@Html.ActionLink("Iniciar Session", "Login", "Home")</li>
+                        }
+                        else
+                        {
+                            using QuienEsQuien.Models;
+                            Usuario usuario = Session["Usuario"] as Usuario;
+
+                            
+                            <li>@Html.ActionLink(usuario.Nombre, "MenuUsuario", "Home")</li>
+                        }
+                    }
+
                 </ul>
             </div>
         </div>
