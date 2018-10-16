@@ -22,27 +22,46 @@ namespace QEQ.Models
             Conexion.Close();
         }
 
-        public static List<Categorias> ListarCategorias(int id = 0)
+        public static List<Categorias> ListarCategorias()
         {
             List<Categorias> ListaDeCategorias = new List<Categorias>();
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "ListarCategorias";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
-            Consulta.Parameters.AddWithValue("@id", id);
             SqlDataReader DataReader = Consulta.ExecuteReader();
             while (DataReader.Read())
             {
-                int Id = Convert.ToInt32(DataReader["id"]);
+                int id = Convert.ToInt32(DataReader["id"]);
                 string Nombre = DataReader["Nombre"].ToString();
                 
 
-                Categorias cate = new Categorias(Id, Nombre);
+                Categorias cate = new Categorias(id, Nombre);
                 ListaDeCategorias.Add(cate);
 
             }
             Desconectar(Conexion);
             return ListaDeCategorias;
+        }
+
+        public static Categorias ObtenerCategoria(int Id)
+        {
+            Categorias cate = new Categorias();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ListarCategorias";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@id", Id);
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            while (DataReader.Read())
+            {
+                int id = Convert.ToInt32(DataReader["id"]);
+                string Nombre = DataReader["Nombre"].ToString();
+
+                cate = new Categorias(id, Nombre);
+            }
+            Desconectar(Conexion);
+            return cate;
         }
 
         public static void InsertarCategoria(string Nombre)

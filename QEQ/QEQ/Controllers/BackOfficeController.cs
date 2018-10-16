@@ -33,8 +33,8 @@ namespace QEQ.Controllers
             {
                 case "Modificar":
 
-                    ListaCategorias = BD.ListarCategorias(id);
-                    C = ListaCategorias[0];
+                    
+                    C = BD.ObtenerCategoria(id);
                     return View("FormularioCategorias", C);
 
 
@@ -48,7 +48,7 @@ namespace QEQ.Controllers
                 case "Eliminar":
                     ViewBag.Enable = new { disabled = "disabled" };
                     C = ListaCategorias[0];
-                    ListaCategorias = BD.ListarCategorias(id);
+                    ListaCategorias = BD.ListarCategorias();
                     return View("FormularioCategorias", C);
 
 
