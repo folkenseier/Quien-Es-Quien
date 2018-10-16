@@ -27,5 +27,15 @@ namespace QEQ.Controllers
             return View();
         }
         */
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ValidarLogIn()
+        {
+            return View();
+        }
     }
 }
