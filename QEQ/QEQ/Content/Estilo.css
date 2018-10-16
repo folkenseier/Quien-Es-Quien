@@ -1,0 +1,21 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Lato');
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+.fondoBarra {
+    background-color: #77D353;
+    width: 100%;
+    height: 10%;
+}
+
+.isotipo {
+    width: 30%;
+    height: 30%;
+}
+
+.RightMargin {
+    text-align: right;
+    color: #343F4B;
+    font-size: 25px;
+}

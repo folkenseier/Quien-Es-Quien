@@ -12,7 +12,7 @@ namespace QEQ.Controllers
         {
             return View();
         }
-
+        /*
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -26,5 +26,6 @@ namespace QEQ.Controllers
 
             return View();
         }
+        */
     }
 }
