@@ -19,3 +19,9 @@ body {
     color: #343F4B;
     font-size: 25px;
 }
+
+.MensajeError {
+    color: #ff0000;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+}

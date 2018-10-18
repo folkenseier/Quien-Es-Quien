@@ -4,14 +4,16 @@
 @{
     ViewBag.Title = "Login";
 }
-
-
+<br />
+<br />
+<br />
+<link rel="stylesheet" type="text/css" href="~/Content/Estilo.css" />
 @using (Html.BeginForm("ValidarLogIn", "Home", FormMethod.Post))
 {
     <p>Ingrese su Mail:</p> @Html.TextBoxFor(x => x.Mail, new { type = "email" })
-    <p>Ingrese su Contraseña:</p> @Html.TextBoxFor(x => x.Contraseña, new { type = "psw" })
+    <p>Ingrese su Contraseña:</p> @Html.PasswordFor(x => x.Contraseña, new { type = "password" })
 
-    <p>@ViewBag.Mensaje</p>
+    <p class ="MensajeError">@ViewBag.Mensaje</p>
 <input type="submit" value="Aceptar">
 }
     

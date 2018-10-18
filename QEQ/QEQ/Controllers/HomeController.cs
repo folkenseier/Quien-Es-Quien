@@ -41,10 +41,14 @@ namespace QEQ.Controllers
             {
                 if (BD.ValidarUser(unUsuario.Mail, unUsuario.Contraseña) == true)
                 {
-                   User = BD.TraerUsuario(unUsuario.Mail, unUsuario.Contraseña);
+                    
+                    User = BD.TraerUsuario(unUsuario.Mail, unUsuario.Contraseña);
+
+                    Session["Usuario"] = User;
+
                     if (User.EsAdmin == true)
                     {
-                        return View("HomeAdmin");
+                        return RedirectToAction("Index", "BackOffice");
                     }
                     else
                     {
@@ -53,7 +57,7 @@ namespace QEQ.Controllers
                 }
                 else
                 {
-                    ViewBag.Mensaje = "Usuario o conraseña erroneo";
+                    ViewBag.Mensaje = "Usuario o contraseña erróneo";
                     return View("Login");
                 }
                 

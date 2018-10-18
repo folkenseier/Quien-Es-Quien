@@ -23,8 +23,18 @@
                 </a>
 
             </div>
+            @{
+                if (Session["Usuario"] != null)
+                {
+                    var User = Session["Usuario"] as QEQ.Models.Usuario;
+                    <h3 class="RightMargin"> @User.Nombre</h3>
+                }
+                else
+                {
+                    <h3 class="RightMargin">@Html.ActionLink("Login", "Login", "Home")</h3>
+                }
+            }
 
-            <h3 class="RightMargin">@Html.ActionLink("Login", "Login", "Home")</h3>
 
 
         </div>
