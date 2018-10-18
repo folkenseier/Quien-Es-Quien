@@ -27,3 +27,9 @@ body {
     padding-top: 10%;
     padding-bottom: 10%;
 }
+
+.MensajeError {
+    font-family: Lato, sans-serif;
+    font-size: 20px;
+    color: red;
+}
