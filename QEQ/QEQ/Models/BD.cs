@@ -22,6 +22,8 @@ namespace QEQ.Models
             Conexion.Close();
         }
 
+        //-----------------------ABM-CATEGORIAS--------------------------------------------------------------------------------
+
         public static List<Categorias> ListarCategorias()
         {
             List<Categorias> ListaDeCategorias = new List<Categorias>();
@@ -49,7 +51,7 @@ namespace QEQ.Models
             Categorias cate = new Categorias();
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
-            Consulta.CommandText = "ListarCategorias";
+            Consulta.CommandText = "ObtenerCategoria";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@id", Id);
             SqlDataReader DataReader = Consulta.ExecuteReader();
@@ -100,6 +102,12 @@ namespace QEQ.Models
 
             Desconectar(Conexion);
         }
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+
+        //----------------------------------------LOGIN-------------------------------------------------------------------------------
+
         public static Usuario TraerUsuario(string Email, string pwd)
         {
             Usuario UnUsuario = new Usuario();
@@ -128,6 +136,23 @@ namespace QEQ.Models
             }
             Desconectar(Conexion);
             return UnUsuario;
+        }
+        public static bool ValidarUser(string Email, string pwd)
+        {
+            bool Existe = false;
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "TraerUsuario";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@Mail", Email);
+            Consulta.Parameters.AddWithValue("@Contraseña", pwd);
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            if (DataReader.Read())
+            {
+                Existe = true;
+            }
+            Desconectar(Conexion);
+            return Existe;
         }
     }
 }

@@ -206,6 +206,7 @@
     <Content Include="Views\BackOffice\FormularioCategorias.cshtml" />
     <Content Include="Views\BackOffice\Confirmacion.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\HomeAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

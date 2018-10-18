@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using QEQ.Models;
 
 namespace QEQ.Controllers
 {
@@ -33,9 +34,35 @@ namespace QEQ.Controllers
         }
 
         [HttpPost]
-        public ActionResult ValidarLogIn()
+        public ActionResult ValidarLogIn(Usuario unUsuario)
         {
-            return View();
+            Usuario User = new Usuario();
+            if (ModelState.IsValid)
+            {
+                if (BD.ValidarUser(unUsuario.Mail, unUsuario.Contraseña) == true)
+                {
+                   User = BD.TraerUsuario(unUsuario.Mail, unUsuario.Contraseña);
+                    if (User.EsAdmin == true)
+                    {
+                        return View("HomeAdmin");
+                    }
+                    else
+                    {
+                        return View("Index");
+                    }
+                }
+                else
+                {
+                    ViewBag.Mensaje = "Usuario o conraseña erroneo";
+                    return View("Login");
+                }
+                
+            }
+            else
+            {
+                return View("Login");
+            }
+            
         }
     }
 }

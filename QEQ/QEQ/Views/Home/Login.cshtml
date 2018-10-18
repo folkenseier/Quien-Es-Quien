@@ -1,4 +1,4 @@
-﻿@using NombreProyecto.Models
+﻿@using QEQ.Models
 @model Usuario
 
 @{
@@ -11,6 +11,7 @@
     <p>Ingrese su Mail:</p> @Html.TextBoxFor(x => x.Mail, new { type = "email" })
     <p>Ingrese su Contraseña:</p> @Html.TextBoxFor(x => x.Contraseña, new { type = "psw" })
 
+    <p>@ViewBag.Mensaje</p>
 <input type="submit" value="Aceptar">
 }
     
