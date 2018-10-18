@@ -1,34 +1,47 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@{
+    ViewBag.Title = "Home";
 }
 <link rel="stylesheet" type="text/css" href="~/Content/Estilo.css" />
 
-<style>
+<div class="Titulo">
+    <h1 style="font-size:60px">¿Quién es quién?</h1>
+</div>
+
+
+<tr>
+    <td>
+        <h3">
+            @Html.ActionLink("Jugar", "#", "#", null, new { @class = "btn btn-default" })
+        </h3>
+    </td>
+    <td>
+        <h3>
+        @Html.ActionLink("Instrucciones", "#", "#", null, new { @class = "btn btn-default" })
+        </h3>
+    </td>
+    <td>
+        <h3>
+        @Html.ActionLink("Contacto", "#", "#", null, new { @class = "btn btn-default" })
+        </h3>
+    </td>
+</tr>
+
+
+<!--<style>
     .Botonera {
         background-color: rgba(57, 145, 242, 0);
         border: 7px solid #47525E;
         border-radius: 100px;
+        text-align: center;
         width: auto;
-        height: 97.19px;
+
+        /*
+
         display: block;
         margin-left: auto;
         margin-right: auto;
-        width: 100%;
+        */
     }
 </style>
-
-
-<div class="jumbotron container">
-
-</div>
-
-<h1>¿Quién es quién?</h1>
-<div class="Botonera">
-    <h3>PORFAVORFUNCIONA</h3>
-</div>
-
-
-
-
-
-
+-->
