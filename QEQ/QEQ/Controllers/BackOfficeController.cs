@@ -47,8 +47,7 @@ namespace QEQ.Controllers
 
                 case "Eliminar":
                     ViewBag.Enable = new { disabled = "disabled" };
-                    C = ListaCategorias[0];
-                    ListaCategorias = BD.ListarCategorias();
+                    C = BD.ObtenerCategoria(id);
                     return View("FormularioCategorias", C);
 
 
@@ -69,7 +68,10 @@ namespace QEQ.Controllers
                     if (ModelState.IsValid)
                     {
                         BD.InsertarCategoria(C.Nombre);
-                        return View("Confirmacion");
+                        ViewBag.Mensaje = "agregado";
+                        ViewBag.NombreCategoria = C.Nombre;
+                        return View("Confirmacion", C);
+                        
                     }
                     else
                     {
@@ -80,6 +82,8 @@ namespace QEQ.Controllers
                     if (ModelState.IsValid)
                     {
                         BD.ModificarCategoria(C);
+                        ViewBag.Mensaje = "modificado";
+                        ViewBag.NombreCategoria = C.Nombre;
                         return View("Confirmacion");
                     }
                     else
@@ -89,11 +93,13 @@ namespace QEQ.Controllers
 
                 case "Eliminar":
                     BD.EliminarCategoria(C.id);
-                    return View("FormularioCategorias", C);
+                    ViewBag.Mensaje = "eliminado";
+                    ViewBag.NombreCategoria = C.Nombre;
+                    return View("Confirmacion", C);
 
-                
+
             }
-            return View("Confirmacion");
+            return View("Confirmacion", C);
         }
     }
 }

@@ -1,0 +1,18 @@
+﻿@using QEQ.Models
+@model Usuario
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+@using (Html.BeginForm("ValidarLogIn", "Home", FormMethod.Post))
+{
+    <p>Ingrese su Mail:</p> @Html.TextBoxFor(x => x.Mail, new { type = "email" })
+    <p>Ingrese su Contraseña:</p> @Html.TextBoxFor(x => x.Contraseña, new { type = "psw" })
+
+    <p>@ViewBag.Mensaje</p>
+<input type="submit" value="Aceptar">
+}
+    
+

@@ -25,7 +25,7 @@ namespace QEQ.Models
         public int id { get => _id; set => _id = value; }
 
         [Required(ErrorMessage = "El campo no puede estar vacío")]
-        [Range(0, 200, ErrorMessage = "El nombre no puede sobrepasar los 200 caracteres")]
+        [StringLength(200,MinimumLength = 0, ErrorMessage = "El nombre no puede sobrepasar los 200 caracteres")]
         public string Nombre { get => _Nombre; set => _Nombre = value; }
     }
 }

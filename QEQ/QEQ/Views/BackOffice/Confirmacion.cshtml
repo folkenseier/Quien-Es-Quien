@@ -1,7 +1,7 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Confirmacion";
 }
 
-<h2>Confirmacion</h2>
+<h2>La categoría @ViewBag.Categoria se ha @ViewBag.Mensaje exitosamente</h2><br/>
 
+@Html.ActionLink("Volver", "ABMCat", "BackOffice", null, new { @class = "btn btn-default" })

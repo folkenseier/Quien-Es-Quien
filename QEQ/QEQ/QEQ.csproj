@@ -157,6 +157,7 @@
     </Compile>
     <Compile Include="Models\BD.cs" />
     <Compile Include="Models\Categorias.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +205,8 @@
     <Content Include="Views\BackOffice\ABMCat.cshtml" />
     <Content Include="Views\BackOffice\FormularioCategorias.cshtml" />
     <Content Include="Views\BackOffice\Confirmacion.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\HomeAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

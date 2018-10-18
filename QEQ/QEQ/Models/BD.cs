@@ -22,6 +22,8 @@ namespace QEQ.Models
             Conexion.Close();
         }
 
+        //-----------------------ABM-CATEGORIAS--------------------------------------------------------------------------------
+
         public static List<Categorias> ListarCategorias()
         {
             List<Categorias> ListaDeCategorias = new List<Categorias>();
@@ -49,7 +51,7 @@ namespace QEQ.Models
             Categorias cate = new Categorias();
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
-            Consulta.CommandText = "ListarCategorias";
+            Consulta.CommandText = "ObtenerCategoria";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@id", Id);
             SqlDataReader DataReader = Consulta.ExecuteReader();
@@ -99,6 +101,58 @@ namespace QEQ.Models
             Consulta.ExecuteNonQuery();
 
             Desconectar(Conexion);
+        }
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+
+        //----------------------------------------LOGIN-------------------------------------------------------------------------------
+
+        public static Usuario TraerUsuario(string Email, string pwd)
+        {
+            Usuario UnUsuario = new Usuario();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "TraerUsuario";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@Mail", Email);
+            Consulta.Parameters.AddWithValue("@Contraseña", pwd);
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            if (DataReader.Read())
+            {
+                int id = Convert.ToInt32(DataReader["id"]);
+                string Nombre = DataReader["Nombre"].ToString();
+                string Mail = DataReader["Mail"].ToString();
+                string Contraseña = DataReader["Contraseña"].ToString();
+                bool EsAdmin = Convert.ToBoolean(DataReader["EsAdmin"]);
+                int Puntaje = Convert.ToInt32(DataReader["Puntaje"]);
+                int Record = Convert.ToInt32(DataReader["Record"]);
+
+
+
+                 UnUsuario = new Usuario(id, Nombre, Mail, Contraseña, EsAdmin, Puntaje, Record);
+               
+
+            }
+            Desconectar(Conexion);
+            return UnUsuario;
+        }
+        public static bool ValidarUser(string Email, string pwd)
+        {
+            bool Existe = false;
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "TraerUsuario";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@Mail", Email);
+            Consulta.Parameters.AddWithValue("@Contraseña", pwd);
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            if (DataReader.Read())
+            {
+                Existe = true;
+            }
+            Desconectar(Conexion);
+            return Existe;
         }
     }
 }
