@@ -4989,11 +4989,7 @@ a.badge:focus {
     padding-right: 30%;
     padding-left: 30%;
   }
-  .jumbotron h1,
-  .jumbotron .h1 {
-    font-size: 60px;
-    font-family: Lato
-  }
+  
 
 .thumbnail {
   display: block;

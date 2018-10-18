@@ -20,8 +20,10 @@ body {
     font-size: 25px;
 }
 
-.MensajeError {
-    color: #ff0000;
-    font-family: 'Lato', sans-serif;
-    font-size: 20px;
+.Titulo {
+    text-align: center;
+    font-family: Lato, sans-serif;
+    font-size: 80px;
+    padding-top: 10%;
+    padding-bottom: 10%;
 }
