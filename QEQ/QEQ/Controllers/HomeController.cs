@@ -65,5 +65,11 @@ namespace QEQ.Controllers
             }
             
         }
+
+        public ActionResult Logout()
+        {
+            Session["Usuario"] = null;
+            return View("index");
+        }
     }
 }

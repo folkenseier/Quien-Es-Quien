@@ -6,8 +6,8 @@
 <br />
 <br />
 <br />
-
 <table>
+
     <tr>
         <th width="250">Nombre</th>
         <th width="250"></th>
@@ -19,7 +19,7 @@
             <tr>
                 <td>@cate.Nombre</td>
                 <td>@Html.ActionLink("Eliminar", "GestionCategorias", "BackOffice", new { Accion = "Eliminar", id = cate.id }, null)</td>
-                <td>@Html.ActionLink("Modificar", "GestionCategorias", "BackOffice", new { Accion = "Modificar", id = cate.id }, new { @class = "btn btn-default" })</td>
+                <td>@Html.ActionLink("Modificar", "GestionCategorias", "BackOffice", new { Accion = "Modificar", id = cate.id }, null)</td>
             </tr>
         }
     }

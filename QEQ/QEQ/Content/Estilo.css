@@ -103,7 +103,8 @@ input[type=submit] {
         background-color: #45a049;
     }
 
-th, td {
+
+        th, td {
     border-bottom: 1px solid #ddd;
 }
 
@@ -111,6 +112,7 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
+
 .MiniRanking {
     width: 500px;
     color: white;
@@ -126,3 +128,6 @@ table {
     .MiniRanking::content {
 
     }
+
+
+   
