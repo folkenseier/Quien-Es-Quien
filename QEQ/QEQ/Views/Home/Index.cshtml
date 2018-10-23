@@ -9,23 +9,33 @@
 </div>
 
 
-<tr>
-    <td>
-        <h3">
-            @Html.ActionLink("Jugar", "#", "#", null, new { @class = "btn btn-default" })
+<div style=" text-align: center">
+    
+        <h3 >
+            @Html.ActionLink("Jugar", "#", "#", null,
+           new { @class = "btn btn-default MenuBtn" })
         </h3>
-    </td>
-    <td>
-        <h3>
-        @Html.ActionLink("Instrucciones", "#", "#", null, new { @class = "btn btn-default" })
+    
+    
+        <h3 >
+        @Html.ActionLink("Instrucciones", "#", "#", null,
+       new { @class = "btn btn-default MenuBtn" })
         </h3>
-    </td>
-    <td>
-        <h3>
-        @Html.ActionLink("Contacto", "#", "#", null, new { @class = "btn btn-default" })
+    
+    
+        <h3 >
+        @Html.ActionLink("Contacto", "#", "#", null, 
+       new { @class = "btn btn-default MenuBtn" })
         </h3>
-    </td>
-</tr>
+    
+</div>
+<table class="MiniRanking">
+    <tr> 
+        Top 5 Jugadores
+    </tr>
+    
+
+</table>
 
 
 <!--<style>

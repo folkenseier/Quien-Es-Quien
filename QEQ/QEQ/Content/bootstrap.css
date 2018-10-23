@@ -1082,7 +1082,6 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
@@ -1589,18 +1588,18 @@ pre code {
 }
 @media (min-width: 768px) {
   .container {
-    width: 750px;
+    width: auto;
   }
 }
 @media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
+    .container {
+        /*width: 970px;*/
+    }
 }
 @media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
+    .container {
+        /*width: 1170px;*/
+    }
 }
 .container-fluid {
   padding-right: 15px;
