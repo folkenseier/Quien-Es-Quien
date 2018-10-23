@@ -33,3 +33,70 @@ body {
     font-size: 20px;
     color: red;
 }
+
+.divForm {
+    width: 500px;
+    text-align: center;
+    border: 1px solid #767676;
+    border-radius: 20px;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+}
+
+.FormUsuario {
+    width: 170px;
+    border: 1px solid green;
+    border-radius: 4px;
+    font-size: 13px;
+    background-color: white;
+    background-image: url("~/Content/UserIcon.png");
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 20px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+    .FormUsuario:focus {
+        width: 100%;
+    }
+
+.FormContraseña {
+    width: 170px;
+    border: 1px solid green;
+    border-radius: 4px;
+    font-size: 13px;
+    background-color: white;
+    background-image: url("~/Content/pswIcon.png");
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 20px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+    .FormContraseña:focus {
+        width: 100%;
+    }
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border-color: #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+th, td {
+    border-bottom: 1px solid #ddd;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}

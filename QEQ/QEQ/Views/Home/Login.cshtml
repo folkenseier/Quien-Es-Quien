@@ -8,13 +8,26 @@
 <br />
 <br />
 <link rel="stylesheet" type="text/css" href="~/Content/Estilo.css" />
-@using (Html.BeginForm("ValidarLogIn", "Home", FormMethod.Post))
-{
-    <p>Ingrese su Mail:</p> @Html.TextBoxFor(x => x.Mail, new { type = "email" })
-    <p>Ingrese su Contraseña:</p> @Html.PasswordFor(x => x.Contraseña, new { type = "password" })
 
-    <p class ="MensajeError">@ViewBag.Mensaje</p>
-<input type="submit" value="Aceptar">
-}
+<div style="align-items: center">
+    <div class="divForm">
+
+        @using (Html.BeginForm("ValidarLogIn", "Home", FormMethod.Post))
+        {
+            <br />
+            <br />
+            @Html.TextBoxFor(x => x.Mail, null, new { type = "email", @placeholder = "Inserte su mail", @class = "FormUsuario" })<br /><br />
+            @Html.PasswordFor(x => x.Contraseña, new { @placeholder = "Inserte su contraseña", @class = "FormContraseña" })
+
+            <p class="MensajeError">@ViewBag.Mensaje</p>
+            <input type="submit" value="Aceptar">
+            <br />
+            <br />
+        }
+
+    </div>
+</div>
+
+
     
 
