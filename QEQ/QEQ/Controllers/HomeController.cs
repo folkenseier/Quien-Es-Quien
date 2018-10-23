@@ -9,9 +9,20 @@ namespace QEQ.Controllers
 {
     public class HomeController : Controller
     {
+        [NonAction]
+        private bool Validate()
+        {
+            Usuario user = Session["Usuario"] as Usuario;
+            if (user == null) return false;
+            return user.EsAdmin;
+        }
+
         public ActionResult Index()
         {
-            return View();
+
+            if (!Validate()) return View();
+            else return RedirectToAction("Index", "BackOffice" );
+
         }
         
         public ActionResult Login()

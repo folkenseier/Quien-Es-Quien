@@ -44,19 +44,7 @@ body {
         background-color: #afe59a;
         color: white;
     }
-.MiniRanking {
-    width: 500px;
-    background-color #77D353;
-    color:white;
-    font:bold;
 
-}
-    .MiniRanking::first-line{
-        height:50px;
-    }
-    .MiniRanking::content{
-        
-    }
 .divForm {
     width: 500px;
     text-align: center;
@@ -122,3 +110,19 @@ th, td {
 table {
     border-collapse: collapse;
     width: 100%;
+}
+.MiniRanking {
+    width: 500px;
+    color: white;
+    font: bold;
+}
+
+    .MiniRanking::first-line {
+        height: 50px;
+        background-color: #77D353;
+
+    }
+
+    .MiniRanking::content {
+
+    }

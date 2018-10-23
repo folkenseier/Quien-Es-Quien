@@ -9,14 +9,23 @@ namespace QEQ.Controllers
 {
     public class BackOfficeController : Controller
     {
+        [NonAction]
+        private bool IsAdmin()
+        {
+            Usuario user = Session["Usuario"] as Usuario;
+            if (user == null) return false;
+            return user.EsAdmin;
+        }
         // GET: BackOffice
         public ActionResult Index()
         {
-            return View();
+            if (IsAdmin()) return View();
+            else return RedirectToAction("Login", "Home");
         }
 
         public ActionResult ABMCat()
         {
+            if (!IsAdmin()) return RedirectToAction("Login", "Home");
             List<Categorias> ListCate = BD.ListarCategorias();
             ViewBag.ListCate = ListCate;
             return View();
@@ -24,6 +33,7 @@ namespace QEQ.Controllers
 
         public ActionResult GestionCategorias(string Accion, int id = 0)
         {
+            if (!IsAdmin()) return RedirectToAction("Login", "Home");
             ViewBag.Enable = new { };
 
             ViewBag.Accion = Accion;
@@ -60,6 +70,8 @@ namespace QEQ.Controllers
         [HttpPost]
         public ActionResult ABMCategorias(string Accion, Categorias C)
         {
+            if (!IsAdmin()) return RedirectToAction("Login", "Home");
+
             ViewBag.Accion = Accion;
             switch (Accion)
             {
