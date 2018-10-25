@@ -154,5 +154,101 @@ namespace QEQ.Models
             Desconectar(Conexion);
             return Existe;
         }
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+        //-----------------------ABM-CATEGORIAS--------------------------------------------------------------------------------
+
+        public static List<Caracteristicas> ListarCaracteristicas()
+        {
+            List<Caracteristicas> ListaDeCaracteristicas = new List<Caracteristicas>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ListarCaracteristicas";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            while (DataReader.Read())
+            {
+                int id = Convert.ToInt32(DataReader["id"]);
+                string Nombre = DataReader["Nombre"].ToString();
+                string TextoPregunta = DataReader["TextoPregunta"].ToString();
+                int ValorPregunta = Convert.ToInt32(DataReader["ValorPregunta"]);
+
+
+                Caracteristicas cara = new Caracteristicas(id, Nombre, TextoPregunta, ValorPregunta);
+                ListaDeCaracteristicas.Add(cara);
+
+            }
+            Desconectar(Conexion);
+            return ListaDeCaracteristicas;
+        }
+
+        public static Caracteristicas ObtenerCaracteristica(int Id)
+        {
+            Caracteristicas cara = new Caracteristicas();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ObtenerCaracteristica";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@id", Id);
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            while (DataReader.Read())
+            {
+                int id = Convert.ToInt32(DataReader["id"]);
+                string Nombre = DataReader["Nombre"].ToString();
+                string TextoPregunta = DataReader["TextoPregunta"].ToString();
+                int ValorPregunta = Convert.ToInt32(DataReader["ValorPregunta"]);
+
+                cara = new Caracteristicas(id, Nombre, TextoPregunta, ValorPregunta);
+            }
+            Desconectar(Conexion);
+            return cara;
+        }
+
+        public static void InsertarCaracteristicas(string Nombre, string TextoPregunta, int ValorPregunta)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "InsertarCaracteristicas";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@Nombre", Nombre);
+            Consulta.Parameters.AddWithValue("@TextoPregunta", TextoPregunta);
+            Consulta.Parameters.AddWithValue("@ValorPregunta", ValorPregunta);
+            Consulta.ExecuteNonQuery();
+
+            Desconectar(Conexion);
+        }
+
+        public static void EliminarCaracteristicas(int id)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "EliminarCaracteristicas";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@id", id);
+            Consulta.ExecuteNonQuery();
+
+            Desconectar(Conexion);
+        }
+
+        public static void ModificarCaracteristicas(Caracteristicas cara)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ModificarCaracteristicas";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@Nombre", cara.Nombre);
+            Consulta.Parameters.AddWithValue("@id", cara.id);
+            Consulta.Parameters.AddWithValue("@TextoPregunta", cara.TextoPregunta);
+            Consulta.Parameters.AddWithValue("@ValorPregunta", cara.ValorPregunta);
+            Consulta.ExecuteNonQuery();
+
+            Desconectar(Conexion);
+        }
+
+        //------------------------------------------------------------------------------------------------------------------------------
+
+
+
     }
 }

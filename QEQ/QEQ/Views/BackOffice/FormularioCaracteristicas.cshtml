@@ -1,0 +1,23 @@
+﻿@using QEQ.Models
+@model Caracteristicas
+@{
+    /**/
+
+    ViewBag.Title = "FormularioCaracteristicas";
+}
+
+<br />
+<br />
+<br />
+
+@using (Html.BeginForm("ABMCaracteristicas", "BackOffice", new { Accion = @ViewBag.Accion }, FormMethod.Post))
+{
+    @Html.HiddenFor(X => X.id)
+    <p>Nombre:</p> @Html.TextBoxFor(X => X.Nombre, (object)ViewBag.Enable) @Html.ValidationMessageFor(X => X.Nombre)<br />
+    <p>TextoPregunta:</p> @Html.TextBoxFor(X => X.TextoPregunta, (object)ViewBag.Enable) @Html.ValidationMessageFor(X => X.TextoPregunta)<br />
+    <p>ValorPregunta:</p> @Html.TextBoxFor(X => X.ValorPregunta, (object)ViewBag.Enable) @Html.ValidationMessageFor(X => X.ValorPregunta)<br />
+
+    <input type="submit" value="Aceptar">
+}
+
+

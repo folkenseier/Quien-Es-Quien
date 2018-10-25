@@ -3,6 +3,9 @@
 }
 <br />
 <br />
-<h2>La categoría @ViewBag.Categoria se ha @ViewBag.Mensaje exitosamente</h2><br/>
+<h2>La @ViewBag.Atributo @ViewBag.Nombre se ha @ViewBag.Mensaje exitosamente</h2><br/>
 
-@Html.ActionLink("Volver", "ABMCat", "BackOffice", null, new { @class = "btn btn-default" })
+@{
+    string AR = @ViewBag.ActionResult;
+}
+@Html.ActionLink("Volver", @AR, "BackOffice", null, new { @class = "btn btn-default" })

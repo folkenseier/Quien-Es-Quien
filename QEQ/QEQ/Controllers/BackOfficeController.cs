@@ -72,6 +72,7 @@ namespace QEQ.Controllers
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Home");
 
+            ViewBag.ActionResult = "ABMCat";
             ViewBag.Accion = Accion;
             switch (Accion)
             {
@@ -80,8 +81,9 @@ namespace QEQ.Controllers
                     if (ModelState.IsValid)
                     {
                         BD.InsertarCategoria(C.Nombre);
+                        ViewBag.Atributo = "categoria";
                         ViewBag.Mensaje = "agregado";
-                        ViewBag.NombreCategoria = C.Nombre;
+                        ViewBag.Nombre = C.Nombre;
                         return View("Confirmacion", C);
                         
                     }
@@ -94,8 +96,9 @@ namespace QEQ.Controllers
                     if (ModelState.IsValid)
                     {
                         BD.ModificarCategoria(C);
+                        ViewBag.Atributo = "categoria";
                         ViewBag.Mensaje = "modificado";
-                        ViewBag.NombreCategoria = C.Nombre;
+                        ViewBag.Nombre = C.Nombre;
                         return View("Confirmacion");
                     }
                     else
@@ -105,13 +108,115 @@ namespace QEQ.Controllers
 
                 case "Eliminar":
                     BD.EliminarCategoria(C.id);
+                    ViewBag.Atributo = "categoria";
                     ViewBag.Mensaje = "eliminado";
-                    ViewBag.NombreCategoria = C.Nombre;
+                    ViewBag.Nombre = C.Nombre;
                     return View("Confirmacion", C);
 
 
             }
             return View("Confirmacion", C);
         }
+
+        public ActionResult ABMCar()
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Home");
+            List<Caracteristicas> ListCara = BD.ListarCaracteristicas();
+            ViewBag.ListCara = ListCara;
+            return View();
+        }
+
+        public ActionResult GestionCaracteristicas(string Accion, int id = 0)
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Home");
+            ViewBag.Enable = new { };
+
+            ViewBag.Accion = Accion;
+            List<Caracteristicas> ListaCaracteristicas = new List<Caracteristicas>();
+            Caracteristicas C = new Caracteristicas();
+            switch (Accion)
+            {
+                case "Modificar":
+
+
+                    C = BD.ObtenerCaracteristica(id);
+                    return View("FormularioCaracteristicas", C);
+
+
+
+                case "Insertar":
+
+                    return View("FormularioCaracteristicas", C);
+
+
+
+                case "Eliminar":
+                    ViewBag.Enable = new { disabled = "disabled" };
+                    C = BD.ObtenerCaracteristica(id);
+                    return View("FormularioCaracteristicas", C);
+
+                case "Ver":
+                    ViewBag.Enable = new { disabled = "disabled" };
+                    C = BD.ObtenerCaracteristica(id);
+                    return View("FormularioCaracteristicas", C);
+
+
+            }
+            return View("FormularioCaracteristicas");
+        }
+
+        [HttpPost]
+        public ActionResult ABMCaracteristicas(string Accion, Caracteristicas C)
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Home");
+
+            ViewBag.ActionResult = "ABMCar";
+            ViewBag.Accion = Accion;
+            switch (Accion)
+            {
+
+                case "Insertar":
+                    if (ModelState.IsValid)
+                    {
+                        BD.InsertarCaracteristicas(C.Nombre, C.TextoPregunta, C.ValorPregunta);
+                        ViewBag.Atributo = "caracteristica";
+                        ViewBag.Mensaje = "agregado";
+                        ViewBag.Nombre = C.Nombre;
+                        return View("Confirmacion", C);
+
+                    }
+                    else
+                    {
+                        return View("FormularioCaracteristicas", C);
+                    }
+
+                case "Modificar":
+                    if (ModelState.IsValid)
+                    {
+                        BD.ModificarCaracteristicas(C);
+                        ViewBag.Atributo = "caracteristica";
+                        ViewBag.Mensaje = "modificado";
+                        ViewBag.Nombre = C.Nombre;
+                        return View("Confirmacion");
+                    }
+                    else
+                    {
+                        return View("FormularioCaracteristicas", C);
+                    }
+
+                case "Eliminar":
+                    BD.EliminarCaracteristicas(C.id);
+                    ViewBag.Atributo = "caracteristica";
+                    ViewBag.Mensaje = "eliminado";
+                    ViewBag.Nombre = C.Nombre;
+                    return View("Confirmacion", C);
+
+                case "Ver":
+                    return RedirectToAction("ABMCar", "BackOffice");
+
+            }
+            return View("Confirmacion", C);
+        }
+
     }
 }
