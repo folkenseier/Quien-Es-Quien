@@ -208,12 +208,12 @@
     <Content Include="Views\BackOffice\Confirmacion.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\BackOffice\Index.cshtml" />
-<<<<<<< HEAD
+
     <Content Include="Views\Home\FormRegistro.cshtml" />
-=======
+
     <Content Include="Views\BackOffice\ABMCar.cshtml" />
     <Content Include="Views\BackOffice\FormularioCaracteristicas.cshtml" />
->>>>>>> f97ce65dc7a08dcc6ea42c248716ff0e33943dec
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
