@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "FormRegistro";
+}
+
+<h2>FormRegistro</h2>
+@using QEQ.Models
+@model Usuario
+<div style="align-items: center">
+    <div class="divForm">
+
+        @using (Html.BeginForm("Registrar", "Home", FormMethod.Post))
+        {
+            @Html.TextBoxFor(x => x.Nombre, null, new { @placeholder = "Nombre de Usuario", @class = "FormUsuario" }) <br />
+            @Html.TextBoxFor(x => x.Mail, null, new { type = "email", @placeholder = "Email", @class = "FormUsuario" })<br />
+            @Html.PasswordFor(x => x.Contraseña, new { @placeholder = "Contraseña", @class = "FormUsuario" })<br />
+            @Html.Password("PIN", new { @placeholder = "PIN (Solo Administradores)", @class = "FormUsuario" })<br />
+            <input type="submit" value="Registrarse" />
+
+        }
+    </div>
+</div>
+

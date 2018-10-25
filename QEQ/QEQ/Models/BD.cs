@@ -137,6 +137,19 @@ namespace QEQ.Models
             Desconectar(Conexion);
             return UnUsuario;
         }
+        public static bool BuscarPorMail(string Email)
+        {
+            
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "BuscarPorMail";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@Mail", Email);
+            bool Ans = true;
+            if (Consulta.ExecuteScalar() == null) Ans = false;
+            Desconectar(Conexion);
+            return Ans;
+        }
         public static bool ValidarUser(string Email, string pwd)
         {
             bool Existe = false;
@@ -154,5 +167,29 @@ namespace QEQ.Models
             Desconectar(Conexion);
             return Existe;
         }
+        //-------------------------------------ABM USUARIOS--------------------------------------------------------//
+        public static bool RegistrarUsuario(Usuario usuario)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "RegistrarUsuario";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@Nombre", usuario.Nombre);
+            Consulta.Parameters.AddWithValue("@Mail", usuario.Mail);
+            Consulta.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
+            Consulta.Parameters.AddWithValue("@EsAdmin", usuario.EsAdmin);
+            try
+            {
+                Consulta.ExecuteNonQuery();
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+            return true;
+            
+        }
+
+        //---------------------------------------------------------------------------------------------------------//
     }
 }
