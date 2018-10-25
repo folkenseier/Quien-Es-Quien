@@ -14,7 +14,10 @@
             @Html.TextBoxFor(x => x.Nombre, null, new { @placeholder = "Nombre de Usuario", @class = "FormUsuario" }) <br />
             @Html.TextBoxFor(x => x.Mail, null, new { type = "email", @placeholder = "Email", @class = "FormUsuario" })<br />
             @Html.PasswordFor(x => x.Contraseña, new { @placeholder = "Contraseña", @class = "FormUsuario" })<br />
-            @Html.Password("PIN", new { @placeholder = "PIN (Solo Administradores)", @class = "FormUsuario" })<br />
+            <input name="pin" type="password" placeholder="PIN" class="FormUsuario"/>
+            <div style="color:red; font-size:8px">
+                 @ViewBag.Mensaje
+            </div>
             <input type="submit" value="Registrarse" />
 
         }

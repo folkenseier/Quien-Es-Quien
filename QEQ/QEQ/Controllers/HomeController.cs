@@ -16,6 +16,11 @@ namespace QEQ.Controllers
             if (user == null) return false;
             return user.EsAdmin;
         }
+        [NonAction]
+        private bool PinCheck(int pin)
+        {
+            return pin == 623;
+        }
 
         public ActionResult Index()
         {
@@ -76,29 +81,34 @@ namespace QEQ.Controllers
         {
             return View();
         }
-    }
-    [HttpPost]
-    public ActionResult Registrar(Usuario usuario)
-    {
-        if (!ModelState.IsValid)
+        [HttpPost]
+        public ActionResult Registrar(Usuario usuario, int pin)
         {
-            return View("FormRegistro", usuario);
-        }
-        if (BD.BuscarPorMail(usuario.Mail))
-        {
-            ViewBag.MailErroneo = "El mail ingresado ya existe";
-        }
-        else
-        {
-            if (BD.RegistrarUsuario(usuario))
+            if (!ModelState.IsValid)
             {
-                return View("Index");
+                if (BD.BuscarPorMail(usuario.Mail))
+                {
+                    ViewBag.Mensaje = "El mail ingresado ya existe";
+                }
+                return View("FormRegistro", usuario);
             }
+
             else
             {
-                return View("FormRegistro");
+                if (BD.RegistrarUsuario(usuario))
+                {
+                    if(PinCheck())
+                    return View("Index");
+                }
+                else
+                {
+                    ViewBag.Mensaje = "Error al cargar la base de datos, intente de nuevo mas tarde.";
+                    return View("FormRegistro");
+                }
             }
         }
     }
+
+    
 
 }
