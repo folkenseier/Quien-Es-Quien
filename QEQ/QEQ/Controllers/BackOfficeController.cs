@@ -72,6 +72,7 @@ namespace QEQ.Controllers
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Home");
 
+            ViewBag.Atributo = "categoría";
             ViewBag.ActionResult = "ABMCat";
             ViewBag.Accion = Accion;
             switch (Accion)
@@ -81,7 +82,6 @@ namespace QEQ.Controllers
                     if (ModelState.IsValid)
                     {
                         BD.InsertarCategoria(C.Nombre);
-                        ViewBag.Atributo = "categoria";
                         ViewBag.Mensaje = "agregado";
                         ViewBag.Nombre = C.Nombre;
                         return View("Confirmacion", C);
@@ -96,7 +96,6 @@ namespace QEQ.Controllers
                     if (ModelState.IsValid)
                     {
                         BD.ModificarCategoria(C);
-                        ViewBag.Atributo = "categoria";
                         ViewBag.Mensaje = "modificado";
                         ViewBag.Nombre = C.Nombre;
                         return View("Confirmacion");
@@ -108,7 +107,6 @@ namespace QEQ.Controllers
 
                 case "Eliminar":
                     BD.EliminarCategoria(C.id);
-                    ViewBag.Atributo = "categoria";
                     ViewBag.Mensaje = "eliminado";
                     ViewBag.Nombre = C.Nombre;
                     return View("Confirmacion", C);
@@ -170,6 +168,7 @@ namespace QEQ.Controllers
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Home");
 
+            ViewBag.Atributo = "característica";
             ViewBag.ActionResult = "ABMCar";
             ViewBag.Accion = Accion;
             switch (Accion)
@@ -179,7 +178,6 @@ namespace QEQ.Controllers
                     if (ModelState.IsValid)
                     {
                         BD.InsertarCaracteristicas(C.Nombre, C.TextoPregunta, C.ValorPregunta);
-                        ViewBag.Atributo = "caracteristica";
                         ViewBag.Mensaje = "agregado";
                         ViewBag.Nombre = C.Nombre;
                         return View("Confirmacion", C);
@@ -193,8 +191,7 @@ namespace QEQ.Controllers
                 case "Modificar":
                     if (ModelState.IsValid)
                     {
-                        BD.ModificarCaracteristicas(C);
-                        ViewBag.Atributo = "caracteristica";
+                        BD.ModificarCaracteristicas(C);                       
                         ViewBag.Mensaje = "modificado";
                         ViewBag.Nombre = C.Nombre;
                         return View("Confirmacion");
@@ -206,7 +203,6 @@ namespace QEQ.Controllers
 
                 case "Eliminar":
                     BD.EliminarCaracteristicas(C.id);
-                    ViewBag.Atributo = "caracteristica";
                     ViewBag.Mensaje = "eliminado";
                     ViewBag.Nombre = C.Nombre;
                     return View("Confirmacion", C);
@@ -217,6 +213,8 @@ namespace QEQ.Controllers
             }
             return View("Confirmacion", C);
         }
+
+        //https://www.w3schools.com/jquery/jquery_filters.asp
 
     }
 }
