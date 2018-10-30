@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using QEQ.Models;
+using System.Text;
+using System.Xml;
+
 
 namespace QEQ.Controllers
 {
@@ -81,6 +84,10 @@ namespace QEQ.Controllers
         {
             return View();
         }
+
+
+
+
         [HttpPost]
         public ActionResult Registrar(Usuario usuario, int pin)
         {
@@ -107,6 +114,36 @@ namespace QEQ.Controllers
                 }
             }
         }
+
+        public string GetUsersAjax()
+        {
+            
+            List<Usuario> Users = BD.ListarUsuarios();
+            Users.OrderBy(x => x.Puntaje).Reverse().Where(x => !x.EsAdmin);
+            string table = "";
+            foreach(var i in Users)
+            {
+                table += "<tr>";
+                table += "<td>"+ i.Nombre +"</td>";
+                table += "<td>"+ i.Puntaje +"</td>";
+                table += "<tr>";
+
+            }
+
+
+          /*  foreach(Usuario user in Users)
+            {
+                xml += "<User>";
+                xml += "<Nombre>"+ user.Id.ToString() +"</Nombre>";
+                xml += "<Puntaje>"+ user.Puntaje.ToString() +"</Puntaje>";
+                xml += "<Record>"+ user.Record.ToString() +"</Record>";
+                xml += "</User>";
+               
+            }
+            xml += "</xml>";*/
+            return table;
+        }
+
     }
 
     

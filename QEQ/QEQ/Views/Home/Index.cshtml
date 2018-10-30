@@ -29,11 +29,33 @@
         </h3>
     
 </div>
-<table class="MiniRanking">
+<script>
+
+    var xHtml = new XMLHttpRequest();
+    xHtml.onreadystatechange = function () {
+        if (this.readyState === 4) {
+            document.getElementById("ranking").innerHTML = this.responseText;
+                
+            }
+    };
+
+    xHtml.open("GET", "Home/XMLUsers");
+    xHtml.send();
+
+
+</script>
+<table  class="MiniRanking">
 
     <tr> 
-        Top 5 Jugadores
+        <th>
+            Nombre
+        </th>
+        <th>Puntaje</th>
     </tr>
+
+    <tbody id="ranking">
+
+    </tbody>
   
     
 
