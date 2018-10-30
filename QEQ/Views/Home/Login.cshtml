@@ -1,6 +1,5 @@
 ﻿@using QEQ.Models
 @model Usuario
-
 @{
     ViewBag.Title = "Login";
 }
@@ -16,8 +15,11 @@
         {
             <br />
             <br />
-            @Html.TextBoxFor(x => x.Mail, null, new { type = "email", @placeholder = "Inserte su mail", @class = "FormUsuario" })<br /><br />
+            @Html.TextBoxFor(x => x.Mail, null, new { type = "email", @placeholder = "Inserte su mail", @class = "FormUsuario" })
+            @Html.ValidationMessageFor(x => x.Mail)
+            <br /><br />
             @Html.PasswordFor(x => x.Contraseña, new { @placeholder = "Inserte su contraseña", @class = "FormContraseña" })
+            @Html.ValidationMessageFor(x => x.Contraseña)
 
             <p class="MensajeError">@ViewBag.Mensaje</p>
             <input type="submit" value="Aceptar">
@@ -29,5 +31,5 @@
 </div>
 
 
-    
+
 

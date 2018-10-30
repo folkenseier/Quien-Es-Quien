@@ -32,13 +32,14 @@ namespace QEQ.Models
 
         public int Id { get => _id; set => _id = value; }
 
-        [Required(ErrorMessage = "El campo no puede estar vacío")]
-        [StringLength(100, MinimumLength = 0, ErrorMessage = "El nombre no puede sobrepasar los 100 caracteres")]
+        //[Required(ErrorMessage = "El campo no puede estar vacío")]
+        //[StringLength(100, MinimumLength = 0, ErrorMessage = "El nombre no puede sobrepasar los 100 caracteres")]
 
         public string Nombre { get => _Nombre; set => _Nombre = value; }
 
         [Required(ErrorMessage = "El campo no puede estar vacío")]
         [StringLength(200, MinimumLength = 0, ErrorMessage = "El Mail no puede sobrepasar los 200 caracteres")]
+
         public string Mail { get => _Mail; set => _Mail = value; }
 
         [Required(ErrorMessage = "El campo no puede estar vacío")]

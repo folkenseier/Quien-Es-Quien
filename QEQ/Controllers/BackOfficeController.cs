@@ -23,6 +23,8 @@ namespace QEQ.Controllers
             else return RedirectToAction("Login", "Home");
         }
 
+//-----------------------ABM-CATEGORIAS-------------------------------------------------------------------------------
+
         public ActionResult ABMCat()
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Home");
@@ -115,6 +117,10 @@ namespace QEQ.Controllers
             }
             return View("Confirmacion", C);
         }
+
+        //---------------------------------------------------------------------------------------------------------------------------------
+
+        //-----------------------ABM-Caracteristicas-------------------------------------------------------------------------------
 
         public ActionResult ABMCar()
         {
@@ -214,7 +220,10 @@ namespace QEQ.Controllers
             return View("Confirmacion", C);
         }
 
-        //https://www.w3schools.com/jquery/jquery_filters.asp
+        //---------------------------------------------------------------------------------------------------------------------------------
+
+        //-----------------------ABM-Personajes-------------------------------------------------------------------------------
+
 
     }
 }

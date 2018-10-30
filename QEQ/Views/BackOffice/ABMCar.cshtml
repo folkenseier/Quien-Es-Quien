@@ -1,0 +1,50 @@
+﻿@using QEQ.Models
+@{
+    ViewBag.Title = "ABMCar";
+}
+
+<br />
+<br />
+<br />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
+<input id="myInput" class="search" type="text" placeholder="     Search..">
+
+<br><br>
+
+    <table>
+            <tr>
+                <th width="250">Nombre</th>
+                <th width="250"></th>
+                <th width="250"></th>
+                <th width="250"></th>
+            </tr>
+        <tbody id="myTable">
+
+            @{
+                foreach (Caracteristicas cara in ViewBag.ListCara)
+                {
+                    <tr>
+                        <td>@cara.Nombre</td>
+                        <td>@Html.ActionLink("Eliminar", "GestionCaracteristicas", "BackOffice", new { Accion = "Eliminar", id = cara.id }, null)</td>
+                        <td>@Html.ActionLink("Modificar", "GestionCaracteristicas", "BackOffice", new { Accion = "Modificar", id = cara.id }, null)</td>
+                        <td>@Html.ActionLink("Ver", "GestionCaracteristicas", "BackOffice", new { Accion = "Ver", id = cara.id }, null)</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+@Html.ActionLink("Insertar una nueva Caracteristica", "GestionCaracteristicas", "BackOffice", new { Accion = "Insertar" }, new { @class = "btn btn-default" })
+
