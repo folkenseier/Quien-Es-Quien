@@ -224,6 +224,51 @@ namespace QEQ.Controllers
 
         //-----------------------ABM-Personajes-------------------------------------------------------------------------------
 
+        public ActionResult ABMPer()
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Home");
+            List<Personajes> ListPer = BD.ListarPersonajes();
+            ViewBag.ListPer = ListPer;
+            return View();
+        }
 
+        public ActionResult GestionPersonajes(string Accion, int id = 0)
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Home");
+            ViewBag.Enable = new { };
+
+            ViewBag.Accion = Accion;
+            List<Personajes> ListaPersonajes = new List<Personajes>();
+            Personajes P = new Personajes();
+            switch (Accion)
+            {
+                case "Modificar":
+
+
+                    P = BD.ObtenerPersonaje(id);
+                    return View("FormularioPersonajes", P);
+
+
+
+                case "Insertar":
+
+                    return View("FormularioPersonajes", P);
+
+
+
+                case "Eliminar":
+                    ViewBag.Enable = new { disabled = "disabled" };
+                    P = BD.ObtenerPersonaje(id);
+                    return View("FormularioPersonajes", P);
+
+                case "Ver":
+                    ViewBag.Enable = new { disabled = "disabled" };
+                    P = BD.ObtenerPersonaje(id);
+                    return View("FormularioPersonajes", P);
+
+
+            }
+            return View("FormularioPersonajes");
+        }
     }
 }
