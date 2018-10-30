@@ -158,6 +158,7 @@
     <Compile Include="Models\BD.cs" />
     <Compile Include="Models\Caracteristicas.cs" />
     <Compile Include="Models\Categorias.cs" />
+    <Compile Include="Models\Personajes.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -208,12 +209,9 @@
     <Content Include="Views\BackOffice\Confirmacion.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\BackOffice\Index.cshtml" />
-
     <Content Include="Views\Home\FormRegistro.cshtml" />
-
     <Content Include="Views\BackOffice\ABMCar.cshtml" />
     <Content Include="Views\BackOffice\FormularioCaracteristicas.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -55,12 +55,12 @@ body {
 }
 
 .FormUsuario {
-    width: 170px;
+    width: 190px;
     border: 1px solid green;
     border-radius: 4px;
     font-size: 13px;
     background-color: white;
-    background-image: url("~/Content/UserIcon.png");
+    background-image: url("UserIcon.jpg");
     background-position: 10px 10px;
     background-repeat: no-repeat;
     padding: 12px 20px 12px 20px;
@@ -72,12 +72,12 @@ body {
     }
 
 .FormContraseña {
-    width: 170px;
+    width: 190px;
     border: 1px solid green;
     border-radius: 4px;
     font-size: 13px;
     background-color: white;
-    background-image: url("~/Content/pswIcon.png");
+    background-image: url("pswIcon.jpg");
     background-position: 10px 10px;
     background-repeat: no-repeat;
     padding: 12px 20px 12px 20px;
@@ -129,5 +129,15 @@ table {
 
     }
 
-
+.search {
+    width: 190px;
+    border: 1px solid green;
+    border-radius: 4px;
+    font-size: 13px;
+    background-color: white;
+    background-image: url("searchicon.png");
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 20px;
+}
    

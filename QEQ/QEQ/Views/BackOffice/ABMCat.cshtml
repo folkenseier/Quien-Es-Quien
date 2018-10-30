@@ -6,6 +6,25 @@
 <br />
 <br />
 <br />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
+
+<input id="myInput" class="search" type="text" placeholder="     Search..">
+
+
+<br><br>
+
 <table>
 
     <tr>
@@ -13,16 +32,18 @@
         <th width="250"></th>
         <th width="250"></th>
     </tr>
-    @{
-        foreach (Categorias cate in ViewBag.ListCate)
-        {
-            <tr>
-                <td>@cate.Nombre</td>
-                <td>@Html.ActionLink("Eliminar", "GestionCategorias", "BackOffice", new { Accion = "Eliminar", id = cate.id }, null)</td>
-                <td>@Html.ActionLink("Modificar", "GestionCategorias", "BackOffice", new { Accion = "Modificar", id = cate.id }, null)</td>
-            </tr>
+    <tbody id="myTable">
+        @{
+            foreach (Categorias cate in ViewBag.ListCate)
+            {
+                <tr>
+                    <td>@cate.Nombre</td>
+                    <td>@Html.ActionLink("Eliminar", "GestionCategorias", "BackOffice", new { Accion = "Eliminar", id = cate.id }, null)</td>
+                    <td>@Html.ActionLink("Modificar", "GestionCategorias", "BackOffice", new { Accion = "Modificar", id = cate.id }, null)</td>
+                </tr>
+            }
         }
-    }
+    </tbody>
 </table>
 
 @Html.ActionLink("Insertar una nueva Categoría", "GestionCategorias", "BackOffice", new { Accion = "Insertar" }, new { @class = "btn btn-default" })
