@@ -202,26 +202,16 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-<<<<<<< HEAD:QEQ/QEQ/QEQ.csproj
     <Content Include="Views\BackOffice\ABMCat.cshtml" />
     <Content Include="Views\BackOffice\FormularioCategorias.cshtml" />
     <Content Include="Views\BackOffice\Confirmacion.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\BackOffice\Index.cshtml" />
     <Content Include="Views\Home\FormRegistro.cshtml" />
-=======
-    <Content Include="Views\Home\FormRegistro.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
->>>>>>> 87e67860e382fb01e67c95ab1f7c40138b23aa25:QEQ/QEQ.csproj
     <Content Include="Views\BackOffice\ABMCar.cshtml" />
     <Content Include="Views\BackOffice\ABMCat.cshtml" />
     <Content Include="Views\BackOffice\Confirmacion.cshtml" />
     <Content Include="Views\BackOffice\FormularioCaracteristicas.cshtml" />
-<<<<<<< HEAD:QEQ/QEQ/QEQ.csproj
-=======
-    <Content Include="Views\BackOffice\FormularioCategorias.cshtml" />
-    <Content Include="Views\BackOffice\Index.cshtml" />
->>>>>>> 87e67860e382fb01e67c95ab1f7c40138b23aa25:QEQ/QEQ.csproj
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
