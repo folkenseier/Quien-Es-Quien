@@ -26,7 +26,7 @@ namespace QEQ.Controllers
         {
 
             if (!Validate()) return View();
-            else return RedirectToAction("Index", "BackOffice" );
+            else return RedirectToAction("Index", "BackOffice");
 
         }
         
@@ -92,12 +92,14 @@ namespace QEQ.Controllers
                 }
                 return View("FormRegistro", usuario);
             }
-
             else
             {
+                if (PinCheck(pin))
+                {
+                    usuario.EsAdmin = true;
+                }
                 if (BD.RegistrarUsuario(usuario))
                 {
-                    if(PinCheck())
                     return View("Index");
                 }
                 else

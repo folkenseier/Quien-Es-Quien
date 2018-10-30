@@ -8,7 +8,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EE881805-1D98-45A9-8B47-5FDECF4571C9}</ProjectGuid>
+    <ProjectGuid>{23F743B1-B5A7-4F62-B6D5-6650E2FC018F}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -145,11 +145,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\BundleConfig2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\FilterConfig2.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\RouteConfig2.cs" />
     <Compile Include="Controllers\BackOfficeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -167,6 +164,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Estilo.css" />
+    <Content Include="Content\isotipo.png" />
+    <Content Include="Content\pswIcon.png" />
+    <Content Include="Content\UserIcon.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -187,9 +187,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -203,17 +201,14 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\BackOffice\ABMCat.cshtml" />
-    <Content Include="Views\BackOffice\FormularioCategorias.cshtml" />
-    <Content Include="Views\BackOffice\Confirmacion.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\BackOffice\Index.cshtml" />
-
     <Content Include="Views\Home\FormRegistro.cshtml" />
-
+    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\BackOffice\ABMCar.cshtml" />
+    <Content Include="Views\BackOffice\ABMCat.cshtml" />
+    <Content Include="Views\BackOffice\Confirmacion.cshtml" />
     <Content Include="Views\BackOffice\FormularioCaracteristicas.cshtml" />
-
+    <Content Include="Views\BackOffice\FormularioCategorias.cshtml" />
+    <Content Include="Views\BackOffice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -247,9 +242,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>63079</DevelopmentServerPort>
+          <DevelopmentServerPort>55782</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63079/</IISUrl>
+          <IISUrl>http://localhost:55782/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
