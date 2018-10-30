@@ -1,6 +1,6 @@
 ﻿@using QEQ.Models
 @{
-    ViewBag.Title = "ABMCategorias";
+    ViewBag.Title = "ABMPer";
 }
 
 <br />
@@ -21,25 +21,30 @@
 
 <input id="myInput" class="search" type="text" placeholder="     Search..">
 
-<table>
+<br><br>
 
+<table>
     <tr>
         <th width="250">Nombre</th>
         <th width="250"></th>
         <th width="250"></th>
+        <th width="250"></th>
     </tr>
     <tbody id="myTable">
+
         @{
-            foreach (Categorias cate in ViewBag.ListCate)
+            foreach (Personajes per in ViewBag.ListPer)
             {
                 <tr>
-                    <td>@cate.Nombre</td>
-                    <td>@Html.ActionLink("Eliminar", "GestionCategorias", "BackOffice", new { Accion = "Eliminar", id = cate.id }, null)</td>
-                    <td>@Html.ActionLink("Modificar", "GestionCategorias", "BackOffice", new { Accion = "Modificar", id = cate.id }, null)</td>
+                    <td>@per.Nombre</td>
+                    <td>@Html.ActionLink("Eliminar", "GestionPersonajes", "BackOffice", new { Accion = "Eliminar", id = per.id }, null)</td>
+                    <td>@Html.ActionLink("Modificar", "GestionPersonajes", "BackOffice", new { Accion = "Modificar", id = per.id }, null)</td>
+                    <td>@Html.ActionLink("Ver", "GestionPersonajes", "BackOffice", new { Accion = "Ver", id = per.id }, null)</td>
                 </tr>
             }
         }
     </tbody>
 </table>
 
-@Html.ActionLink("Insertar una nueva Categoría", "GestionCategorias", "BackOffice", new { Accion = "Insertar" }, new { @class = "btn btn-default" })
+
+@Html.ActionLink("Insertar un nuevo Personaje", "GestionPersonajes", "BackOffice", new { Accion = "Insertar" }, new { @class = "btn btn-default" })

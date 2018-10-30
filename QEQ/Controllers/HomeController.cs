@@ -39,7 +39,7 @@ namespace QEQ.Controllers
         public ActionResult ValidarLogIn(Usuario unUsuario)
         {
             Usuario User = new Usuario();
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValidField("Mail") || !ModelState.IsValidField("Contraseña"))
             {
                 return View("Login", unUsuario);
             }

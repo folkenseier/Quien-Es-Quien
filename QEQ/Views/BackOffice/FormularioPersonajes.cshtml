@@ -1,0 +1,19 @@
+﻿@using QEQ.Models
+@model Personajes
+@{
+    ViewBag.Title = "FormularioPersonajes";
+}
+
+<br />
+<br />
+<br />
+
+@using (Html.BeginForm("ABMPersonajes", "BackOffice", new { Accion = @ViewBag.Accion }, FormMethod.Post))
+{
+    @Html.HiddenFor(X => X.id)
+    @Html.HiddenFor(X => X.fkCategoria)
+    <p>Nombre:</p> @Html.TextBoxFor(X => X.Nombre, (object)ViewBag.Enable) @Html.ValidationMessageFor(X => X.Nombre)<br />
+
+    <input type="submit" value="Aceptar">
+}
+
