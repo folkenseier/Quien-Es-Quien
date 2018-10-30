@@ -21,6 +21,8 @@
             <br /><br />
             @Html.PasswordFor(x => x.Contraseña, new { @placeholder = "Inserte su contraseña", @class = "FormContraseña" })
             @Html.ValidationMessageFor(x => x.Contraseña)
+            @Html.TextBoxFor(x => x.Mail, null, new { type = "email", @placeholder = "     Inserte su mail", @class = "FormUsuario" })<br /><br />
+            @Html.PasswordFor(x => x.Contraseña, new { @placeholder = "      Inserte su contraseña", @class = "FormContraseña" })
 
             <p class="MensajeError">@ViewBag.Mensaje</p>
             <input type="submit" value="Aceptar">

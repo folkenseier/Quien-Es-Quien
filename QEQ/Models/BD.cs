@@ -287,8 +287,91 @@ namespace QEQ.Models
 
         //------------------------------------------------------------------------------------------------------------------------------
 
+        //----------------------------------------ABMPersonajes-------------------------------------------------------------------------------
+
+        public static List<Personajes> ListarPersonajes()
+        {
+            List<Personajes> ListaDePersonajes = new List<Personajes>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ListarPersonajes";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            while (DataReader.Read())
+            {
+                int id = Convert.ToInt32(DataReader["id"]);
+                string Nombre = DataReader["Nombre"].ToString();
+                int fkCategoria = Convert.ToInt32(DataReader["fkCategoria"]);
 
 
+                Personajes pers = new Personajes(id, Nombre, fkCategoria);
+                ListaDePersonajes.Add(pers);
 
+            }
+            Desconectar(Conexion);
+            return ListaDePersonajes;
+        }
+
+        public static Personajes ObtenerPersonaje(int Id)
+        {
+            Personajes pers = new Personajes();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ObtenerPersonaje";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@id", Id);
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            while (DataReader.Read())
+            {
+                int id = Convert.ToInt32(DataReader["id"]);
+                string Nombre = DataReader["Nombre"].ToString();
+                int fkCategoria = Convert.ToInt32(DataReader["fkCategoria"]);
+
+                pers = new Personajes(id, Nombre, fkCategoria);
+            }
+            Desconectar(Conexion);
+            return pers;
+        }
+
+        public static void InsertarPersonajes(string Nombre, int fkCategoria)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "InsertarPersonaje";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@Nombre", Nombre);
+            Consulta.Parameters.AddWithValue("@fkCategoria", fkCategoria);
+            Consulta.ExecuteNonQuery();
+
+            Desconectar(Conexion);
+        }
+
+        public static void EliminarPersonajes(int id)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "EliminarPersonaje";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@id", id);
+            Consulta.ExecuteNonQuery();
+
+            Desconectar(Conexion);
+        }
+
+        public static void ModificarPersonajes(Personajes pers)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ModificarPersonaje";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@id", pers.id);
+            Consulta.Parameters.AddWithValue("@Nombre", pers.Nombre);
+            Consulta.Parameters.AddWithValue("@fkCategoria", pers.fkCategoria);
+            Consulta.ExecuteNonQuery();
+
+            Desconectar(Conexion);
+        }
+
+        //------------------------------------------------------------------------------------------------------------------------------
     }
 }
