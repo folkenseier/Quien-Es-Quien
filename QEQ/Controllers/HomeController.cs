@@ -39,7 +39,11 @@ namespace QEQ.Controllers
         public ActionResult ValidarLogIn(Usuario unUsuario)
         {
             Usuario User = new Usuario();
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+            {
+                return View("Login", unUsuario);
+            }
+            else
             {
                 if (BD.ValidarUser(unUsuario.Mail, unUsuario.Contraseña) == true)
                 {
@@ -64,11 +68,6 @@ namespace QEQ.Controllers
                 }
                 
             }
-            else
-            {
-                return View("Login");
-            }
-            
         }
 
         public ActionResult Logout()
@@ -86,14 +85,15 @@ namespace QEQ.Controllers
         {
             if (!ModelState.IsValid)
             {
-                if (BD.BuscarPorMail(usuario.Mail))
-                {
-                    ViewBag.Mensaje = "El mail ingresado ya existe";
-                }
                 return View("FormRegistro", usuario);
             }
             else
             {
+                if (BD.BuscarPorMail(usuario.Mail))
+                {
+                    ViewBag.Mensaje = "El mail ingresado ya existe";
+                    return View("FormRegistro", usuario);
+                }
                 if (PinCheck(pin))
                 {
                     usuario.EsAdmin = true;
