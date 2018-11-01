@@ -34,7 +34,10 @@ namespace QEQ.Controllers
         {
             return View();
         }
-
+        public ActionResult Contacto()
+        {
+            return View();
+        }
         [HttpPost]
         public ActionResult ValidarLogIn(Usuario unUsuario)
         {

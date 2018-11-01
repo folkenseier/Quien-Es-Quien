@@ -246,29 +246,102 @@ namespace QEQ.Controllers
 
 
                     P = BD.ObtenerPersonaje(id);
+                    ViewBag.ListCate = BD.ListarCategorias();
                     return View("FormularioPersonajes", P);
 
 
 
                 case "Insertar":
 
+                    ViewBag.ListCate = BD.ListarCategorias();
                     return View("FormularioPersonajes", P);
 
 
 
                 case "Eliminar":
+                    Categorias Cat = new Categorias();
                     ViewBag.Enable = new { disabled = "disabled" };
                     P = BD.ObtenerPersonaje(id);
+                    List<Categorias> ListCat = new List<Categorias>();
+                    Cat = BD.ObtenerCategoria(P.fkCategoria);
+                    ListCat.Add(Cat);
+                    Cat = new Categorias(0, "");
+                    ListCat.Add(Cat);
+                    ViewBag.ListCate = ListCat;
+
                     return View("FormularioPersonajes", P);
 
                 case "Ver":
+                    Categorias Cate = new Categorias();
                     ViewBag.Enable = new { disabled = "disabled" };
                     P = BD.ObtenerPersonaje(id);
+                    List<Categorias> ListCate = new List<Categorias>();
+                    Cate = BD.ObtenerCategoria(P.fkCategoria);
+                    ListCate.Add(Cate); 
+                    Cate = new Categorias(0,"");
+                    ListCate.Add(Cate);
+                    ViewBag.ListCate = ListCate;
+
                     return View("FormularioPersonajes", P);
 
 
             }
             return View("FormularioPersonajes");
+        }
+
+        [HttpPost]
+        public ActionResult ABMPersonajes(string Accion, Personajes P)
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Home");
+
+            ViewBag.Atributo = "personajes";
+            ViewBag.ActionResult = "ABMPer";
+            ViewBag.Accion = Accion;
+
+
+            switch (Accion)
+            {
+
+                case "Insertar":
+                    if (ModelState.IsValid)
+                    {
+                        BD.InsertarPersonajes(P.Nombre, P.fkCategoria);
+                        ViewBag.Mensaje = "agregado";
+                        ViewBag.Nombre = P.Nombre;
+
+                        return View("Confirmacion", P);
+
+                       
+                    }
+                    else
+                    {
+                        return View("FormularioPersonajes", P);
+                    }
+
+                case "Modificar":
+                    if (ModelState.IsValid)
+                    {
+                        BD.ModificarPersonajes(P);
+                        ViewBag.Mensaje = "modificado";
+                        ViewBag.Nombre = P.Nombre;
+                        return View("Confirmacion");
+                    }
+                    else
+                    {
+                        return View("FormularioPersonajes", P);
+                    }
+
+                case "Eliminar":
+                    BD.EliminarPersonajes(P.id);
+                    ViewBag.Mensaje = "eliminado";
+                    ViewBag.Nombre = P.Nombre;
+                    return View("Confirmacion", P);
+
+                case "Ver":
+                    return RedirectToAction("ABMPer", "BackOffice");
+
+            }
+            return View("Confirmacion", P);
         }
     }
 }

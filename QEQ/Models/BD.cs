@@ -340,7 +340,7 @@ namespace QEQ.Models
             Consulta.CommandText = "InsertarPersonaje";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@Nombre", Nombre);
-            Consulta.Parameters.AddWithValue("@fkCategoria", fkCategoria);
+            Consulta.Parameters.AddWithValue("@idCategoria", fkCategoria);
             Consulta.ExecuteNonQuery();
 
             Desconectar(Conexion);
@@ -350,7 +350,7 @@ namespace QEQ.Models
         {
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
-            Consulta.CommandText = "EliminarPersonaje";
+            Consulta.CommandText = "CAMBIAREliminarPersonaje";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@id", id);
             Consulta.ExecuteNonQuery();
@@ -366,7 +366,7 @@ namespace QEQ.Models
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@id", pers.id);
             Consulta.Parameters.AddWithValue("@Nombre", pers.Nombre);
-            Consulta.Parameters.AddWithValue("@fkCategoria", pers.fkCategoria);
+            Consulta.Parameters.AddWithValue("@idCategoria", pers.fkCategoria);
             Consulta.ExecuteNonQuery();
 
             Desconectar(Conexion);
