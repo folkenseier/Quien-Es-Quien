@@ -10,50 +10,67 @@
 
 
 <div style=" text-align: center">
-    
-        <h3 >
-            @Html.ActionLink("Jugar", "#", "#", null,
-           new { @class = "btn btn-default MenuBtn" })
-        </h3>
-    
-    
-        <h3 >
+
+    <h3>
+        @Html.ActionLink("Jugar", "#", "#", null,
+       new { @class = "btn btn-default MenuBtn" })
+    </h3>
+
+
+    <h3>
         @Html.ActionLink("Instrucciones", "#", "#", null,
        new { @class = "btn btn-default MenuBtn" })
-        </h3>
-    
-    
-        <h3 >
-        @Html.ActionLink("Contacto", "#", "#", null, 
+    </h3>
+
+
+    <h3>
+        @Html.ActionLink("Contacto", "#", "#", null,
        new { @class = "btn btn-default MenuBtn" })
-        </h3>
-    
+    </h3>
+
 </div>
+<script>
+
+    var xHtml = new XMLHttpRequest();
+    xHtml.onreadystatechange = function () {
+        if (this.readyState === 4) {
+            document.getElementById("ranking").innerHTML = this.responseText;
+
+        }
+    };
+
+    xHtml.open("GET", "Home/GetUsersAjax");
+    xHtml.send();
+
+
+</script>
 <table class="MiniRanking">
 
-    <tr> 
-        Top 5 Jugadores
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>Puntaje</th>
     </tr>
-  
-    
 
-</table>
+    <tbody id="ranking"></tbody>
 
+    </table>
 
-<!--<style>
-    .Botonera {
-        background-color: rgba(57, 145, 242, 0);
-        border: 7px solid #47525E;
-        border-radius: 100px;
-        text-align: center;
-        width: auto;
+    <!--<style>
+        .Botonera {
+            background-color: rgba(57, 145, 242, 0);
+            border: 7px solid #47525E;
+            border-radius: 100px;
+            text-align: center;
+            width: auto;
 
-        /*
+            /*
 
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        */
-    }
-</style>
--->
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            */
+        }
+    </style>
+    -->

@@ -11,8 +11,8 @@
 @using (Html.BeginForm("ABMPersonajes", "BackOffice", new { Accion = @ViewBag.Accion }, FormMethod.Post))
 {
     @Html.HiddenFor(X => X.id)
-    @Html.HiddenFor(X => X.fkCategoria)
-    <p>Nombre:</p> @Html.TextBoxFor(X => X.Nombre, (object)ViewBag.Enable) @Html.ValidationMessageFor(X => X.Nombre)<br />
+    <p>Nombre:</p> @Html.TextBoxFor(X => X.Nombre, (object)ViewBag.Enable) @Html.ValidationMessageFor(X => X.Nombre)<br /><br />
+    @Html.DropDownListFor(x => x.fkCategoria, new SelectList(ViewBag.ListCate, "id", "Nombre"), (object)ViewBag.Enable)<br /><br />
 
     <input type="submit" value="Aceptar">
 }

@@ -82,7 +82,7 @@ var isFunction = function isFunction( obj ) {
 
 
 var isWindow = function isWindow( obj ) {
-		return obj != null && obj === obj.window;
+		return obj !== null && obj === obj.window;
 	};
 
 
@@ -113,7 +113,7 @@ var isWindow = function isWindow( obj ) {
 
 
 function toType( obj ) {
-	if ( obj == null ) {
+	if ( obj === null ) {
 		return obj + "";
 	}
 
@@ -162,7 +162,7 @@ jQuery.fn = jQuery.prototype = {
 	get: function( num ) {
 
 		// Return all the elements in a clean array
-		if ( num == null ) {
+		if ( num === null ) {
 			return slice.call( this );
 		}
 
@@ -254,7 +254,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 	for ( ; i < length; i++ ) {
 
 		// Only deal with non-null/undefined values
-		if ( ( options = arguments[ i ] ) != null ) {
+		if ( ( options = arguments[ i ] ) !== null ) {
 
 			// Extend the base object
 			for ( name in options ) {
@@ -368,7 +368,7 @@ jQuery.extend( {
 
 	// Support: Android <=4.0 only
 	trim: function( text ) {
-		return text == null ?
+		return text === null ?
 			"" :
 			( text + "" ).replace( rtrim, "" );
 	},
@@ -377,7 +377,7 @@ jQuery.extend( {
 	makeArray: function( arr, results ) {
 		var ret = results || [];
 
-		if ( arr != null ) {
+		if ( arr !== null ) {
 			if ( isArrayLike( Object( arr ) ) ) {
 				jQuery.merge( ret,
 					typeof arr === "string" ?
@@ -392,7 +392,7 @@ jQuery.extend( {
 	},
 
 	inArray: function( elem, arr, i ) {
-		return arr == null ? -1 : indexOf.call( arr, elem, i );
+		return arr === null ? -1 : indexOf.call( arr, elem, i );
 	},
 
 	// Support: Android <=4.0 only, PhantomJS 1 only
@@ -442,7 +442,7 @@ jQuery.extend( {
 			for ( ; i < length; i++ ) {
 				value = callback( elems[ i ], i, arg );
 
-				if ( value != null ) {
+				if ( value !== null ) {
 					ret.push( value );
 				}
 			}
@@ -452,7 +452,7 @@ jQuery.extend( {
 			for ( i in elems ) {
 				value = callback( elems[ i ], i, arg );
 
-				if ( value != null ) {
+				if ( value !== null ) {
 					ret.push( value );
 				}
 			}
@@ -706,7 +706,7 @@ try {
 			var j = target.length,
 				i = 0;
 			// Can't trust NodeList.length
-			while ( (target[j++] = els[i++]) ) {}
+            while ((target[j++] = els[i++])) { var x = 0;}
 			target.length = j - 1;
 		}
 	};
@@ -830,8 +830,8 @@ function Sizzle( selector, context, results, seed ) {
 							newContext.querySelectorAll( newSelector )
 						);
 						return results;
-					} catch ( qsaError ) {
-					} finally {
+                    } catch (qsaError) { var x = 0;}
+                     finally {
 						if ( nid === expando ) {
 							context.removeAttribute( "id" );
 						}
@@ -865,7 +865,7 @@ function createCache() {
 	return cache;
 }
 
-/**
+/*
  * Mark a function for special use by Sizzle
  * @param {Function} fn The function to mark
  */
@@ -874,7 +874,7 @@ function markFunction( fn ) {
 	return fn;
 }
 
-/**
+/*
  * Support testing using an element
  * @param {Function} fn Passed the created element and returns a boolean result
  */
@@ -909,7 +909,7 @@ function addHandle( attrs, handler ) {
 	}
 }
 
-/**
+/*
  * Checks document order of two siblings
  * @param {Element} a
  * @param {Element} b
@@ -937,7 +937,7 @@ function siblingCheck( a, b ) {
 	return a ? 1 : -1;
 }
 
-/**
+/*
  * Returns a function to use in pseudos for input types
  * @param {String} type
  */
@@ -948,7 +948,7 @@ function createInputPseudo( type ) {
 	};
 }
 
-/**
+/*
  * Returns a function to use in pseudos for buttons
  * @param {String} type
  */
@@ -959,7 +959,7 @@ function createButtonPseudo( type ) {
 	};
 }
 
-/**
+/*
  * Returns a function to use in pseudos for :enabled/:disabled
  * @param {Boolean} disabled true for :disabled; false for :enabled
  */
@@ -1015,7 +1015,7 @@ function createDisabledPseudo( disabled ) {
 	};
 }
 
-/**
+/*
  * Returns a function to use in pseudos for positionals
  * @param {Function} fn
  */
@@ -1061,7 +1061,7 @@ isXML = Sizzle.isXML = function( elem ) {
 	return documentElement ? documentElement.nodeName !== "HTML" : false;
 };
 
-/**
+/*
  * Sets document-related variables once based on the current document
  * @param {Element|Object} [doc] An element or document object to use to set the document
  * @returns {Object} Returns the current document
@@ -1498,7 +1498,7 @@ Sizzle.matchesSelector = function( elem, expr ) {
 					elem.document && elem.document.nodeType !== 11 ) {
 				return ret;
 			}
-		} catch (e) {}
+        } catch (e) { var x = 0;}
 	}
 
 	return Sizzle( expr, document, null, [ elem ] ).length > 0;
@@ -1541,7 +1541,7 @@ Sizzle.error = function( msg ) {
 	throw new Error( "Syntax error, unrecognized expression: " + msg );
 };
 
-/**
+/*
  * Document sorting and removing duplicates
  * @param {ArrayLike} results
  */
@@ -1574,7 +1574,7 @@ Sizzle.uniqueSort = function( results ) {
 	return results;
 };
 
-/**
+/*
  * Utility function for retrieving the text value of an array of DOM nodes
  * @param {Array|Element} elem
  */
@@ -1729,7 +1729,7 @@ Expr = Sizzle.selectors = {
 			return function( elem ) {
 				var result = Sizzle.attr( elem, name );
 
-				if ( result == null ) {
+				if ( result === null ) {
 					return operator === "!=";
 				}
 				if ( !operator ) {
@@ -2063,7 +2063,7 @@ Expr = Sizzle.selectors = {
 
 				// Support: IE<8
 				// New HTML5 attribute values (e.g., "search") appear with elem.type === "text"
-				( (attr = elem.getAttribute("type")) == null || attr.toLowerCase() === "text" );
+				( (attr = elem.getAttribute("type")) === null || attr.toLowerCase() === "text" );
 		},
 
 		// Position-in-collection
@@ -2297,7 +2297,7 @@ function condense( unmatched, map, filter, context, xml ) {
 		newUnmatched = [],
 		i = 0,
 		len = unmatched.length,
-		mapped = map != null;
+		mapped = map !== null;
 
 	for ( ; i < len; i++ ) {
 		if ( (elem = unmatched[i]) ) {
@@ -2477,7 +2477,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 				// We must always have either seed elements or outermost context
 				elems = seed || byElement && Expr.find["TAG"]( "*", outermost ),
 				// Use integer dirruns iff this is the outermost matcher
-				dirrunsUnique = (dirruns += contextBackup == null ? 1 : Math.random() || 0.1),
+				dirrunsUnique = (dirruns += contextBackup === null ? 1 : Math.random() || 0.1),
 				len = elems.length;
 
 			if ( outermost ) {
@@ -2487,7 +2487,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 			// Add elements passing elementMatchers directly to results
 			// Support: IE<9, Safari
 			// Tolerate NodeList properties (IE: "length"; Safari: <number>) matching elements by id
-			for ( ; i !== len && (elem = elems[i]) != null; i++ ) {
+			for ( ; i !== len && (elem = elems[i]) !== null; i++ ) {
 				if ( byElement && elem ) {
 					j = 0;
 					if ( !context && elem.ownerDocument !== document ) {
@@ -2605,7 +2605,7 @@ compile = Sizzle.compile = function( selector, match /* Internal Use Only */ ) {
 	return cached;
 };
 
-/**
+/*
  * A low-level selection function that works with Sizzle's compiled
  *  selector functions
  * @param {String|Function} selector A selector or a pre-compiled
@@ -2734,7 +2734,7 @@ if ( !support.attributes || !assert(function( el ) {
 // Support: IE<9
 // Use getAttributeNode to fetch booleans when getAttribute lies
 if ( !assert(function( el ) {
-	return el.getAttribute("disabled") == null;
+	return el.getAttribute("disabled") === null;
 }) ) {
 	addHandle( booleans, function( elem, name, isXML ) {
 		var val;
@@ -3106,7 +3106,7 @@ jQuery.fn.extend( {
 } );
 
 function sibling( cur, dir ) {
-	while ( ( cur = cur[ dir ] ) && cur.nodeType !== 1 ) {}
+    while ((cur = cur[dir]) && cur.nodeType !== 1) { var x = 0;}
 	return cur;
 }
 
@@ -3683,7 +3683,7 @@ jQuery.extend( {
 				// Get a promise for this deferred
 				// If obj is provided, the promise aspect is added to the object
 				promise: function( obj ) {
-					return obj != null ? jQuery.extend( obj, promise ) : promise;
+					return obj !== null ? jQuery.extend( obj, promise ) : promise;
 				}
 			},
 			deferred = {};
@@ -3915,7 +3915,7 @@ if ( document.readyState === "complete" ||
 var access = function( elems, fn, key, value, chainable, emptyGet, raw ) {
 	var i = 0,
 		len = elems.length,
-		bulk = key == null;
+		bulk = key === null;
 
 	// Sets many values
 	if ( toType( key ) === "object" ) {
@@ -4207,7 +4207,7 @@ function dataAttr( elem, key, data ) {
 		if ( typeof data === "string" ) {
 			try {
 				data = getData( data );
-			} catch ( e ) {}
+            } catch (e) { var x = 0;}
 
 			// Make sure we set the data so it isn't changed later
 			dataUser.set( elem, key, data );
@@ -4638,7 +4638,7 @@ function showHide( elements, show ) {
 
 	// Set the display of the elements in a second loop to avoid constant reflow
 	for ( index = 0; index < length; index++ ) {
-		if ( values[ index ] != null ) {
+		if ( values[ index ] !== null ) {
 			elements[ index ].style.display = values[ index ];
 		}
 	}
@@ -4898,7 +4898,7 @@ function on( elem, types, selector, data, fn, one ) {
 		return elem;
 	}
 
-	if ( data == null && fn == null ) {
+	if ( data === null && fn === null ) {
 
 		// ( types, fn )
 		fn = selector;
