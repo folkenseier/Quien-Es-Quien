@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using QEQ.Models;
+using System.Text;
+using System.Xml;
+
 
 namespace QEQ.Controllers
 {
@@ -34,7 +37,10 @@ namespace QEQ.Controllers
         {
             return View();
         }
-
+        public ActionResult Contacto()
+        {
+            return View();
+        }
         [HttpPost]
         public ActionResult ValidarLogIn(Usuario unUsuario)
         {
@@ -80,6 +86,10 @@ namespace QEQ.Controllers
         {
             return View();
         }
+
+
+
+
         [HttpPost]
         public ActionResult Registrar(Usuario usuario, int pin)
         {
@@ -109,21 +119,24 @@ namespace QEQ.Controllers
                 }
             }
         }
+
         public string GetUsersAjax()
         {
-
+            
             List<Usuario> Users = BD.ListarUsuarios();
             Users.OrderBy(x => x.Puntaje).Reverse().Where(x => !x.EsAdmin);
             string table = "";
-            foreach (var i in Users)
+            foreach(var i in Users)
             {
                 table += "<tr>";
-                table += "<td>" + i.Nombre + "</td>";
-                table += "<td>" + i.Puntaje + "</td>";
+                table += "<td>"+ i.Nombre +"</td>";
+                table += "<td>"+ i.Puntaje +"</td>";
                 table += "<tr>";
 
             }
 
+
+            return table;
 
             /*  foreach(Usuario user in Users)
               {
@@ -135,7 +148,16 @@ namespace QEQ.Controllers
 
               }
               xml += "</xml>";*/
-            return table;
+            /*  foreach(Usuario user in Users)
+              {
+                  xml += "<User>";
+                  xml += "<Nombre>"+ user.Id.ToString() +"</Nombre>";
+                  xml += "<Puntaje>"+ user.Puntaje.ToString() +"</Puntaje>";
+                  xml += "<Record>"+ user.Record.ToString() +"</Record>";
+                  xml += "</User>";
+
+              }
+              xml += "</xml>";*/
         }
 
     }

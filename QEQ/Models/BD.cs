@@ -183,7 +183,7 @@ namespace QEQ.Models
             {
                 Consulta.ExecuteNonQuery();
             }
-            catch(Exception)
+            catch(Exception e)
             {
                 return false;
             }
@@ -191,6 +191,31 @@ namespace QEQ.Models
             
         }
 
+        public static List<Usuario> ListarUsuarios()
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ListarUsuarios";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            List<Usuario> Usuarios = new List<Usuario>;
+            while (DataReader.Read())
+            {
+                int id = Convert.ToInt32(DataReader["id"]);
+                string Nombre = DataReader["Nombre"].ToString();
+                string Mail = DataReader["Mail"].ToString();
+                string Contraseña = DataReader["Contraseña"].ToString();
+                bool EsAdmin = Convert.ToBoolean(DataReader["EsAdmin"]);
+                int Puntaje = Convert.ToInt32(DataReader["Puntaje"]);
+                int Record = Convert.ToInt32(DataReader["Record"]);
+
+
+
+                Usuarios.Add(new Usuario(id, Nombre, Mail, Contraseña, EsAdmin, Puntaje, Record));
+
+            }
+            return Usuarios;
+        }
         
 
 
