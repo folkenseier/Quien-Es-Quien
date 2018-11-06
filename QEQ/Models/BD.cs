@@ -198,7 +198,7 @@ namespace QEQ.Models
             Consulta.CommandText = "ListarUsuarios";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             SqlDataReader DataReader = Consulta.ExecuteReader();
-            List<Usuario> Usuarios = new List<Usuario>;
+            List<Usuario> Usuarios = new List<Usuario>();
             while (DataReader.Read())
             {
                 int id = Convert.ToInt32(DataReader["id"]);

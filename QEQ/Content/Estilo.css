@@ -9,8 +9,8 @@ body {
 }
 
 .isotipo {
-    width: 30%;
-    height: 30%;
+    width: 75px;
+    height: 75px;
 }
 
 .RightMargin {
@@ -39,6 +39,7 @@ body {
     color:white;
     font:bold;
     width:150px;
+
 }
     .MenuBtn:hover {
         background-color: #afe59a;
@@ -111,12 +112,18 @@ input[type=submit] {
 table {
     border-collapse: collapse;
     width: 100%;
+  
+}
+table, th, td {
+    border: 1px solid black;
 }
 
 .MiniRanking {
     width: 500px;
-    color: white;
+    color: black;
     font: bold;
+  
+
 }
 
     .MiniRanking::first-line {
@@ -126,7 +133,10 @@ table {
     }
 
     .MiniRanking::content {
-
+        width: 500px;
+        color: black;
+        font: bold;
+    
     }
 
 .search {
