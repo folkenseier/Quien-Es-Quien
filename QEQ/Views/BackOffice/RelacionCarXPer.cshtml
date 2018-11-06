@@ -1,0 +1,21 @@
+﻿@using QEQ.Models;
+@{
+    ViewBag.Title = "RelacionCarXPer";
+}
+
+<h2>RelacionCarXPer</h2>
+
+<form action="@Url.Action("CarXPer", "BackOffice", new { Accion = ViewBag.Accion})" method="post">
+    @foreach (Caracteristicas Car in ViewBag.ListaDeCaracteristicas)
+    {
+        if (ViewBag.ListaCarXPer.Contains(Car))
+        {
+            <input type="checkbox" name=" @Car.Nombre" value=" @Car.id" checked> @Car.Nombre <br />
+        }
+        else
+        {
+            <input type="checkbox" name=" @Car.Nombre" value=" @Car.id"> @Car.Nombre <br />
+        }
+    }
+    <input type="submit" value=" Aceptar" />
+</form>
