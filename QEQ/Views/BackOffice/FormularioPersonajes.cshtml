@@ -14,6 +14,6 @@
     <p>Nombre:</p> @Html.TextBoxFor(X => X.Nombre, (object)ViewBag.Enable) @Html.ValidationMessageFor(X => X.Nombre)<br /><br />
     @Html.DropDownListFor(x => x.fkCategoria, new SelectList(ViewBag.ListCate, "id", "Nombre"), (object)ViewBag.Enable)<br /><br />
 
-    <input type="submit" value="Aceptar">
+    <input type="submit" value="Siguiente">
 }
 

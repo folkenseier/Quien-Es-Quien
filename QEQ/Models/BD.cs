@@ -375,7 +375,7 @@ namespace QEQ.Models
         {
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
-            Consulta.CommandText = "CAMBIAREliminarPersonaje";
+            Consulta.CommandText = "EliminarPersonaje";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@id", id);
             Consulta.ExecuteNonQuery();
@@ -398,5 +398,55 @@ namespace QEQ.Models
         }
 
         //------------------------------------------------------------------------------------------------------------------------------
+
+        //----------------------------------------CaracteristicasPorPersonaje-------------------------------------------------------------------------------
+
+        public static List<CaracteristicasXPersonaje> ListarCarXPer(int idPersonaje)
+        {
+            List<CaracteristicasXPersonaje> ListaDeCarXPer = new List<CaracteristicasXPersonaje>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ListarCarXPer";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@idPersonaje", idPersonaje);
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            while (DataReader.Read())
+            {
+                int id = Convert.ToInt32(DataReader["id"]);
+                string Nombre = DataReader["Nombre"].ToString();
+
+                CaracteristicasXPersonaje cara = new CaracteristicasXPersonaje(id, Nombre);
+                ListaDeCarXPer.Add(cara);
+
+            }
+            Desconectar(Conexion);
+            return ListaDeCarXPer;
+        }
+
+        public static void EliminarCaraXPer(int id)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "EliminarCaraXPer";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@idPersonaje", id);
+            Consulta.ExecuteNonQuery();
+
+            Desconectar(Conexion);
+        }
+
+        public static void InsertarCarPer(int idCaracteristica, int idPersonaje)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "InsertarCarPer";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@idPersonaje", idPersonaje);
+            Consulta.Parameters.AddWithValue("@idCaracteristica", idCaracteristica);
+            Consulta.ExecuteNonQuery();
+
+            Desconectar(Conexion);
+        }
+
     }
 }

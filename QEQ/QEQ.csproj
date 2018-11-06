@@ -154,6 +154,7 @@
     </Compile>
     <Compile Include="Models\BD.cs" />
     <Compile Include="Models\Caracteristicas.cs" />
+    <Compile Include="Models\CaracteristicasXPersonaje.cs" />
     <Compile Include="Models\Categorias.cs" />
     <Compile Include="Models\Personajes.cs" />
     <Compile Include="Models\Usuario.cs" />
@@ -213,6 +214,7 @@
     <Content Include="Views\BackOffice\ABMPer.cshtml" />
     <Content Include="Views\BackOffice\FormularioPersonajes.cshtml" />
     <Content Include="Views\Home\Contacto.cshtml" />
+    <Content Include="Views\BackOffice\RelacionCarXPer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
