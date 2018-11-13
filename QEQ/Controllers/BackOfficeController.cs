@@ -284,7 +284,6 @@ namespace QEQ.Controllers
                     ViewBag.Categoria = Cate.Nombre;
                     ViewBag.Nombre = Per.Nombre;
                     return View("Ver");
-                   
 
 
             }
@@ -311,7 +310,6 @@ namespace QEQ.Controllers
                         BD.InsertarPersonajes(P.Nombre, P.fkCategoria);
                         ListaDeCaracteristicas = BD.ListarCarID();
 
-
                         ViewBag.ListaCar = ListaDeCaracteristicas;
                         ViewBag.ListaCarXPer = new List<int>();
                         ViewBag.idPersonaje = BD.ObtenerUltimoIdPersonaje();
@@ -328,9 +326,9 @@ namespace QEQ.Controllers
                 case "Modificar":
                     if (ModelState.IsValid)
                     {
-
                         List<CaracteristicasXPersonaje> ListaDeCaracteristicas = new List<CaracteristicasXPersonaje>();
                         List<int> ListaDeCarXPer = new List<int>();
+
 
                         BD.ModificarPersonajes(P);
                         ListaDeCaracteristicas = BD.ListarCarID();

@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Instrucciones";
+}
+
+<h2 style="margin-top:30px">Instrucciones</h2>
+
+<p>
+    Cada jugador dispone de un tablero idéntico que contiene N personajes identificados por su nombre y su imagen, y categoría. <br />
+    Se puede jugar solo con personajes de una categoría seleccionada inicialmente. (o con todos). <br />
+    Ejemplos de categorías son “futbolistas”, “profesores”, “artistas”, etc. <br /><br />
+
+    El objetivo principal del juego es adivinar el personaje seleccionado por la máquina o por otro usuario, dependiendo del modo de juego elegido. <br /><br />
+
+    Modos de Juego: <br />
+<ul>
+    <li>Invitado</li>
+    <li>Usuario Registrado. (Se acumulan tus infocoins al final del juego)</li>
+</ul>
+    <br />
+    La “máquina” selecciona un personaje al azar. Luego de dicha selección, comienza la partida y el usuario dispone de un botín inicial (1000000 infocoins). <br />
+    El objetivo del juego consiste en descubrir el personaje seleccionado por la “máquina” y quedarse con el mayor botín posible. <br />
+    Para descubrir el personaje existen una serie de preguntas con características del mismo. Dichas características tienen como respuesta un SI, si el personaje en cuestión posee dicha definición. <br />
+    Cada pregunta descontará del botín una suma de bitcoins. <br />
+    Se podrá arriesgar en cualquier momento. Al fallar, se descontará del botín la suma de 50000 bitcoins. Si quedan 5 personajes o menos y fallas, perderá su botín completo. <br />
+    El listado de personajes se mostrará al inicio del juego. Luego quedarán ocultos. Si en la mitad del juego, se desea ver de nuevo la lista de personajes restantes, se descontarán 5000 bitcoins por cada vez que se consulte.<br />
+</p>
+

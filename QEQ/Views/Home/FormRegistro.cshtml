@@ -3,24 +3,25 @@
     ViewBag.Title = "FormRegistro";
 }
 
-<h2>FormRegistro</h2>
+<h2 style="margin-top:30px">Registro</h2>
 @using QEQ.Models
 @model Usuario
 <div style="align-items: center">
+    <p>Ingrese username, mail, contraseña y un pin en el caso de ser administrador. <br /> 
+    Si no lo ingresa, se registrará como jugador. <br /><br />
+    (*) Campos obligatorios.</p>
     <div class="divForm">
-
         @using (Html.BeginForm("Registrar", "Home", FormMethod.Post))
         {
-            @Html.TextBoxFor(x => x.Nombre, null, new { @placeholder = "Nombre de Usuario", @class = "FormUsuario" }) <br />
-            @Html.TextBoxFor(x => x.Mail, null, new { type = "email", @placeholder = "Email", @class = "FormUsuario" })<br />
-            @Html.PasswordFor(x => x.Contraseña, new { @placeholder = "Contraseña", @class = "FormUsuario" })<br />
-            <input name="pin" type="password" placeholder="PIN" class="FormUsuario"/>
+            @Html.TextBoxFor(x => x.Nombre, null, new { @placeholder = "     Username*", @class = "FormUsuario" }) <br />
+            @Html.TextBoxFor(x => x.Mail, null, new { type = "email", @placeholder = "     Email*", @class = "FormUsuario" })<br />
+            @Html.PasswordFor(x => x.Contraseña, new { @placeholder = "     Contraseña*", @class = "FormUsuario" })<br />
+            <input name="pin" type="password" placeholder="     PIN (solo admin)" class="FormUsuario" />
             <div style="color:red; font-size:8px">
-                 @ViewBag.Mensaje
+                @ViewBag.Mensaje
             </div>
             <input type="submit" value="Registrarse" />
 
         }
     </div>
 </div>
-

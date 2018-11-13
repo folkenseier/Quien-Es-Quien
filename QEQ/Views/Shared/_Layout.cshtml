@@ -13,28 +13,26 @@
     <div class="navbar navbar-fixed-top">
         <div class="container fondoBarra">
             <div class="navbar-header ">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+
                 <a href="@Url.Action("Index", "Home")">
                     <img src="~/Content/isotipo.png" class=" isotipo" />
                 </a>
 
             </div>
-            @{
-                if (Session["Usuario"] != null)
-                {
-                    var User = Session["Usuario"] as QEQ.Models.Usuario;
-                    <h3 class="RightMargin"> @Html.ActionLink(@User.Nombre, "Logout", "Home")</h3>
+            <div class="RightMargin">
+                @{
+                    if (Session["Usuario"] != null)
+                    {
+                        var User = Session["Usuario"] as QEQ.Models.Usuario;
+                        <h3> @Html.ActionLink(@User.Nombre, "Logout", "Home")</h3>
+                    }
+                    else
+                    {
+                        <h3 style="float:right; padding-left:10px">@Html.ActionLink("Login", "Login", "Home")</h3>
+                        <h3 style="float:right; padding-right: 10px">@Html.ActionLink("Registrarse", "FormRegistro", "Home")</h3>
+                    }
                 }
-                else
-                {
-                    <h3 class="RightMargin">@Html.ActionLink("Login", "Login", "Home")</h3>
-                    <h3 class="RightMargin">@Html.ActionLink("Registrarse", "FormRegistro", "Home")</h3>
-                }
-            }
+            </div>
 
 
 

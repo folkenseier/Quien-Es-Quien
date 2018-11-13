@@ -20,7 +20,7 @@ namespace QEQ.Controllers
             return user.EsAdmin;
         }
         [NonAction]
-        private bool PinCheck(int pin)
+        private bool PinCheck(int? pin)
         {
             return pin == 623;
         }
@@ -32,12 +32,16 @@ namespace QEQ.Controllers
             else return RedirectToAction("Index", "BackOffice");
 
         }
-        
+
         public ActionResult Login()
         {
             return View();
         }
         public ActionResult Contacto()
+        {
+            return View();
+        }
+        public ActionResult Instrucciones()
         {
             return View();
         }
@@ -53,7 +57,7 @@ namespace QEQ.Controllers
             {
                 if (BD.ValidarUser(unUsuario.Mail, unUsuario.Contraseña) == true)
                 {
-                    
+
                     User = BD.TraerUsuario(unUsuario.Mail, unUsuario.Contraseña);
 
                     Session["Usuario"] = User;
@@ -64,22 +68,22 @@ namespace QEQ.Controllers
                     }
                     else
                     {
-                        return View("Index");
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                 else
                 {
                     ViewBag.Mensaje = "Usuario o contraseña erróneo";
-                    return View("Login");
+                    return View("Login", unUsuario);
                 }
-                
+
             }
         }
 
         public ActionResult Logout()
         {
             Session["Usuario"] = null;
-            return View("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult FormRegistro()
@@ -91,7 +95,7 @@ namespace QEQ.Controllers
 
 
         [HttpPost]
-        public ActionResult Registrar(Usuario usuario, int pin)
+        public ActionResult Registrar(Usuario usuario, int? pin)
         {
             if (!ModelState.IsValid)
             {
@@ -104,33 +108,42 @@ namespace QEQ.Controllers
                     ViewBag.Mensaje = "El mail ingresado ya existe";
                     return View("FormRegistro", usuario);
                 }
-                if (PinCheck(pin))
+                if(pin != 623 && pin != null)
+                {
+                    ViewBag.Mensaje = "Pin incorrecto";
+                    return View("FormRegistro", usuario);
+                }
+                else if (PinCheck(pin))
                 {
                     usuario.EsAdmin = true;
                 }
                 if (BD.RegistrarUsuario(usuario))
                 {
-                    return View("Index");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     ViewBag.Mensaje = "Error al cargar la base de datos, intente de nuevo mas tarde.";
-                    return View("FormRegistro");
+                    return View("FormRegistro", usuario);
                 }
             }
         }
 
-        public string GetUsersAjax()
+        public string GetUserRanking()
         {
-            
-            List<Usuario> Users = BD.ListarUsuarios();
-            Users.OrderBy(x => x.Puntaje).Reverse().Where(x => !x.EsAdmin);
+
+            List<Usuario> GetUsers = BD.ListarUsuarios();
+            IEnumerable<Usuario> Users = GetUsers.
+                Where(x => x.EsAdmin == false).
+                OrderBy(x => x.Puntaje).
+                Reverse();
+
             string table = "";
-            foreach(var i in Users)
+            foreach (var i in Users)
             {
                 table += "<tr>";
-                table += "<td>"+ i.Nombre +"</td>";
-                table += "<td>"+ i.Puntaje +"</td>";
+                table += "<td >" + i.Nombre + "</td>";
+                table += "<td>" + i.Puntaje + "</td>";
                 table += "<tr>";
 
             }
@@ -159,9 +172,30 @@ namespace QEQ.Controllers
               }
               xml += "</xml>";*/
         }
+        public string GetRecordRanking()
+        {
+
+            List<Usuario> GetUsers = BD.ListarUsuarios();
+            IEnumerable<Usuario> Users = GetUsers.
+                Where(x => x.EsAdmin == false).
+                OrderBy(x => x.Puntaje).
+                Reverse();
+
+            string table = "";
+            foreach (var i in Users)
+            {
+                table += "<tr>";
+                table += "<td >" + i.Nombre + "</td>";
+                table += "<td>" + i.Record + "</td>";
+                table += "<tr>";
+
+            }
+
+
+            return table;
+
+        }
 
     }
-
-
 
 }

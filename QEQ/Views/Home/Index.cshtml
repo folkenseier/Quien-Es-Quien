@@ -12,27 +12,18 @@
 <div style=" text-align: center">
 
     <h3>
-        @Html.ActionLink("Jugar", "#", "#", null,
-       new { @class = "btn btn-default MenuBtn" })
+        @Html.ActionLink("Jugar", "Jugar", "Juego", null, new { @class = "btn btn-default MenuBtn" }) <!--te lleva a controller "Juego"-->
     </h3>
 
 
     <h3>
-        @Html.ActionLink("Instrucciones", "#", "#", null,
-       new { @class = "btn btn-default MenuBtn" })
+        @Html.ActionLink("Instrucciones", "Instrucciones", "Home", null, new { @class = "btn btn-default MenuBtn" })
     </h3>
+
 
 
     <h3>
-        @Html.ActionLink("Contacto", "#", "#", null,
-              new { @class = "btn btn-default MenuBtn" })
-
-    </h3>
-    
-    
-        <h3 >
-        @Html.ActionLink("Contacto", "Contacto", "Home", null, 
-       new { @class = "btn btn-default MenuBtn" })
+        @Html.ActionLink("Contacto", "Contacto", "Home", null, new { @class = "btn btn-default MenuBtn" })
     </h3>
 
 </div>
@@ -41,48 +32,92 @@
     var xHtml = new XMLHttpRequest();
     xHtml.onreadystatechange = function () {
         if (this.readyState === 4) {
-            document.getElementById("ranking").innerHTML = this.responseText;
+            document.getElementById("useranking").innerHTML = this.responseText;
 
 
         }
     };
 
 
-    xHtml.open("GET", "Home/XMLUsers");
+    xHtml.open("GET", "Home/GetUserRanking");
+    xHtml.send();
+
+
+</script>
+<script>
+
+    xHtml = new XMLHttpRequest();
+    xHtml.onreadystatechange = function () {
+        if (this.readyState === 4) {
+            document.getElementById("recordranking").innerHTML = this.responseText;
+
+
+        }
+    };
+
+
+    xHtml.open("GET", "Home/GetRecordRanking");
     xHtml.send();
 
 
 </script>
 
+<style>
 
-<table  class="MiniRanking">
+    table {
+        border-radius: 8px;
+    }
+</style>
+<div style="float:left">
+    <h3>Mayor Puntaje</h3>
+    <table class="MiniRanking" style="float:left">
 
-    <tr> 
-        <th>
-            Nombre
-        </th>
-        <th>Puntaje</th>
-    </tr>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>Puntaje</th>
+        </tr>
 
 
-    <tbody id="ranking"></tbody>
+        <tbody id="useranking"></tbody>
 
     </table>
 
-    <!--<style>
-        .Botonera {
-            background-color: rgba(57, 145, 242, 0);
-            border: 7px solid #47525E;
-            border-radius: 100px;
-            text-align: center;
-            width: auto;
+</div>
+<div style= "float: right">
+    <h3>Record</h3>
+    <table class="MiniRanking" style="float:right">
 
-            /*
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>Puntaje</th>
+        </tr>
 
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            */
-        }
-    </style>
-    -->
+
+        <tbody id="recordranking"></tbody>
+
+    </table>
+
+
+
+</div>
+<!--<style>
+    .Botonera {
+        background-color: rgba(57, 145, 242, 0);
+        border: 7px solid #47525E;
+        border-radius: 100px;
+        text-align: center;
+        width: auto;
+
+        /*
+
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        */
+    }
+</style>
+-->
