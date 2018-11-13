@@ -23,7 +23,7 @@ namespace QEQ.Controllers
             else return RedirectToAction("Login", "Home");
         }
 
-//-----------------------ABM-CATEGORIAS-------------------------------------------------------------------------------
+        //-----------------------ABM-CATEGORIAS-------------------------------------------------------------------------------
 
         public ActionResult ABMCat()
         {
@@ -45,14 +45,14 @@ namespace QEQ.Controllers
             {
                 case "Modificar":
 
-                    
+
                     C = BD.ObtenerCategoria(id);
                     return View("FormularioCategorias", C);
 
 
 
                 case "Insertar":
-                   
+
                     return View("FormularioCategorias", C);
 
 
@@ -63,7 +63,7 @@ namespace QEQ.Controllers
                     return View("FormularioCategorias", C);
 
 
-                
+
 
             }
             return View("FormularioCategorias");
@@ -87,7 +87,7 @@ namespace QEQ.Controllers
                         ViewBag.Mensaje = "agregado";
                         ViewBag.Nombre = C.Nombre;
                         return View("Confirmacion", C);
-                        
+
                     }
                     else
                     {
@@ -197,7 +197,7 @@ namespace QEQ.Controllers
                 case "Modificar":
                     if (ModelState.IsValid)
                     {
-                        BD.ModificarCaracteristicas(C);                       
+                        BD.ModificarCaracteristicas(C);
                         ViewBag.Mensaje = "modificado";
                         ViewBag.Nombre = C.Nombre;
                         return View("Confirmacion");
@@ -214,6 +214,7 @@ namespace QEQ.Controllers
                     return View("Confirmacion", C);
 
                 case "Ver":
+
                     return RedirectToAction("ABMCar", "BackOffice");
 
             }
@@ -270,19 +271,20 @@ namespace QEQ.Controllers
                     ViewBag.ListCate = ListCat;
 
                     return View("FormularioPersonajes", P);
-
+                    
+                    
                 case "Ver":
+                    List<CaracteristicasXPersonaje> ListaDeCar = new List<CaracteristicasXPersonaje>();
+                    Personajes Per = new Personajes();
+                    Per = BD.ObtenerPersonaje(id);
+                    ListaDeCar = BD.ListarCarDePer(Per.id);
                     Categorias Cate = new Categorias();
-                    ViewBag.Enable = new { disabled = "disabled" };
-                    P = BD.ObtenerPersonaje(id);
-                    List<Categorias> ListCate = new List<Categorias>();
-                    Cate = BD.ObtenerCategoria(P.fkCategoria);
-                    ListCate.Add(Cate); 
-                    Cate = new Categorias(0,"");
-                    ListCate.Add(Cate);
-                    ViewBag.ListCate = ListCate;
-
-                    return View("FormularioPersonajes", P);
+                    Cate = BD.ObtenerCategoria(Per.fkCategoria);
+                    ViewBag.ListaDeCar = ListaDeCar;
+                    ViewBag.Categoria = Cate.Nombre;
+                    ViewBag.Nombre = Per.Nombre;
+                    return View("Ver");
+                   
 
 
             }
@@ -294,10 +296,6 @@ namespace QEQ.Controllers
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Home");
 
-            /*
-            ViewBag.Atributo = "personajes";
-            ViewBag.ActionResult = "ABMPer";
-            */
             ViewBag.Accion = Accion;
 
 
@@ -307,22 +305,20 @@ namespace QEQ.Controllers
                 case "Insertar":
                     if (ModelState.IsValid)
                     {
-                        List<Caracteristicas> ListaDeCaracteristicas = new List<Caracteristicas>();
-                        
-                        
+                        List<CaracteristicasXPersonaje> ListaDeCaracteristicas = new List<CaracteristicasXPersonaje>();
+
+
                         BD.InsertarPersonajes(P.Nombre, P.fkCategoria);
-                        ListaDeCaracteristicas= BD.ListarCaracteristicas();
-                       
+                        ListaDeCaracteristicas = BD.ListarCarID();
+
 
                         ViewBag.ListaCar = ListaDeCaracteristicas;
-                        ViewBag.ListaCarXPer = "";
-
-                        //ViewBag.Mensaje = "agregado";
-                        //ViewBag.Nombre = P.Nombre;
+                        ViewBag.ListaCarXPer = new List<int>();
+                        ViewBag.idPersonaje = BD.ObtenerUltimoIdPersonaje();
 
                         return View("RelacionCarXPer", P);
 
-                       
+
                     }
                     else
                     {
@@ -332,18 +328,17 @@ namespace QEQ.Controllers
                 case "Modificar":
                     if (ModelState.IsValid)
                     {
-                        
-                        //ViewBag.Mensaje = "modificado";
-                        //ViewBag.Nombre = P.Nombre;
-                        List<Caracteristicas> ListaDeCaracteristicas = new List<Caracteristicas>();
-                        List<CaracteristicasXPersonaje> ListaDeCarXPer = new List<CaracteristicasXPersonaje>();
+
+                        List<CaracteristicasXPersonaje> ListaDeCaracteristicas = new List<CaracteristicasXPersonaje>();
+                        List<int> ListaDeCarXPer = new List<int>();
 
                         BD.ModificarPersonajes(P);
-                        ListaDeCaracteristicas = BD.ListarCaracteristicas();
+                        ListaDeCaracteristicas = BD.ListarCarID();
                         ListaDeCarXPer = BD.ListarCarXPer(P.id);
 
                         ViewBag.ListaCar = ListaDeCaracteristicas;
                         ViewBag.ListaCarXPer = ListaDeCarXPer;
+                        ViewBag.idPersonaje = P.id;
 
                         return View("RelacionCarXPer");
                     }
@@ -353,23 +348,44 @@ namespace QEQ.Controllers
                     }
 
                 case "Eliminar":
+                    Personajes Per = new Personajes();
+                    Per = BD.ObtenerPersonaje(P.id);
                     BD.EliminarPersonajes(P.id);
-                    //ViewBag.Mensaje = "eliminado";
-                    //ViewBag.Nombre = P.Nombre;
-                    //CAMBIAR
-                    return View("RelacionCarXPer", P);
+                    ViewBag.Mensaje = "eliminado";
+                    ViewBag.Atributo = "personaje";
+                    ViewBag.Nombre = Per.Nombre;
+                    ViewBag.ActionResult = "ABMPer";
+                    return View("Confirmacion");
 
-                case "Ver":
-                    return RedirectToAction("ABMPer", "BackOffice");
-                    //CAMBIAR
 
             }
             return View("RelacionCarXPer", P);
         }
+
         [HttpPost]
-        public ActionResult CarXPer(string id, string Accion)
+        public ActionResult CarXPer(int idPer, string[] idCar, string Accion)
         {
 
-            return View("");
+            if (!IsAdmin()) return RedirectToAction("Login", "Home");
+
+            Personajes Per = new Personajes();
+            Per = BD.ObtenerPersonaje(idPer);
+            ViewBag.Nombre = Per.Nombre;
+            ViewBag.Atributo = "personaje";
+            ViewBag.ActionResult = "ABMPer";
+
+            BD.InsertarCarPer(idCar, idPer);
+            switch (Accion)
+            {
+                case "Insertar":
+                    ViewBag.Mensaje = "agregado";
+                    break;
+
+                case "Modificar":
+                    ViewBag.Mensaje = "modificado";
+                    break;
+            }
+            return View("Confirmacion");
         }
+    }
 }

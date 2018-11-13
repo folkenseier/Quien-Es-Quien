@@ -6,16 +6,18 @@
 <h2>RelacionCarXPer</h2>
 
 <form action="@Url.Action("CarXPer", "BackOffice", new { Accion = ViewBag.Accion})" method="post">
-    @foreach (Caracteristicas Car in ViewBag.ListaDeCaracteristicas)
+    <input type="hidden" name="idPer" value="@ViewBag.idPersonaje" /><br />
+    @foreach (CaracteristicasXPersonaje Car in ViewBag.ListaCar)
     {
-        if (ViewBag.ListaCarXPer.Contains(Car))
-        {
-            <input type="checkbox" name=" @Car.Nombre" value=" @Car.id" checked> @Car.Nombre <br />
-        }
-        else
-        {
-            <input type="checkbox" name=" @Car.Nombre" value=" @Car.id"> @Car.Nombre <br />
-        }
+            if (ViewBag.ListaCarXPer.Contains(Car.idCaracteristica))
+            {
+                <input type="checkbox" name="idCar" value=" @Car.idCaracteristica" checked> @Car.Nombre <br />
+            }
+            else
+            {
+                <input type="checkbox" name="idCar" value=" @Car.idCaracteristica"> @Car.Nombre <br />
+            }
+
     }
     <input type="submit" value=" Aceptar" />
 </form>

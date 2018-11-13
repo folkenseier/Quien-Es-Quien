@@ -167,8 +167,10 @@ namespace QEQ.Models
             Desconectar(Conexion);
             return Existe;
         }
+        //----------------------------------------------------------------------------------------------------------------------------------
 
-        //-------------------------------------ABM USUARIOS--------------------------------------------------------//
+
+        //-------------------------------------ABM USUARIOS------------------------------------------------------------------------------------
         public static bool RegistrarUsuario(Usuario usuario)
         {
             SqlConnection Conexion = Conectar();
@@ -198,7 +200,7 @@ namespace QEQ.Models
             Consulta.CommandText = "ListarUsuarios";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             SqlDataReader DataReader = Consulta.ExecuteReader();
-            List<Usuario> Usuarios = new List<Usuario>;
+            List<Usuario> Usuarios = new List<Usuario>();
             while (DataReader.Read())
             {
                 int id = Convert.ToInt32(DataReader["id"]);
@@ -221,7 +223,7 @@ namespace QEQ.Models
 
         //----------------------------------------------------------------------------------------------------------------------------------
 
-        //-----------------------ABM-CATEGORIAS--------------------------------------------------------------------------------
+        //-----------------------ABM-CARACTERISTICAS--------------------------------------------------------------------------------
 
         public static List<Caracteristicas> ListarCaracteristicas()
         {
@@ -401,8 +403,94 @@ namespace QEQ.Models
 
         //----------------------------------------CaracteristicasPorPersonaje-------------------------------------------------------------------------------
 
-        public static List<CaracteristicasXPersonaje> ListarCarXPer(int idPersonaje)
+        public static List<int> ListarCarXPer(int idPersonaje)
         {
+            List<int> ListaDeCarXPer = new List<int>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ListarCarXPer";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@idPersonaje", idPersonaje);
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            while (DataReader.Read())
+            {
+                int id = Convert.ToInt32(DataReader["id"]);
+                ListaDeCarXPer.Add(id);
+
+            }
+            Desconectar(Conexion);
+            return ListaDeCarXPer;
+        }
+
+        public static List<CaracteristicasXPersonaje> ListarCarID()
+        {
+            List<CaracteristicasXPersonaje> ListaDeCaracteristicas = new List<CaracteristicasXPersonaje>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ListarCaracteristicas";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            while (DataReader.Read())
+            {
+                int id = Convert.ToInt32(DataReader["id"]);
+                string Nombre = DataReader["Nombre"].ToString();
+
+
+                CaracteristicasXPersonaje cara = new CaracteristicasXPersonaje(id, Nombre);
+                ListaDeCaracteristicas.Add(cara);
+
+            }
+            Desconectar(Conexion);
+            return ListaDeCaracteristicas;
+        }
+
+
+        public static void InsertarCarPer(string[] idCars, int idPersonaje)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "EliminarCarXPer";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@idPersonaje", idPersonaje);
+            Consulta.ExecuteNonQuery();
+            
+            foreach (string ID in idCars)
+            {
+                int id = Convert.ToInt32(ID);
+                SqlCommand Consulta2 = Conexion.CreateCommand();
+                Consulta2.CommandText = "InsertarCarPer";
+                Consulta2.CommandType = System.Data.CommandType.StoredProcedure;
+                Consulta2.Parameters.AddWithValue("@idPersonaje", idPersonaje);
+                Consulta2.Parameters.AddWithValue("@idCaracteristica", id);
+                Consulta2.ExecuteNonQuery();
+            }
+
+            Desconectar(Conexion);
+        }
+
+        public static int ObtenerUltimoIdPersonaje()
+        {
+            int id = new int();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ObtenerUltimoIdPersonaje";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+
+            if (DataReader.Read())
+            {
+                id = Convert.ToInt32(DataReader["UltimoId"]);
+
+            }
+
+
+            Desconectar(Conexion);
+            return id;
+        }
+
+        public static List<CaracteristicasXPersonaje> ListarCarDePer(int idPersonaje)
+        {
+            CaracteristicasXPersonaje Car = new CaracteristicasXPersonaje();
             List<CaracteristicasXPersonaje> ListaDeCarXPer = new List<CaracteristicasXPersonaje>();
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
@@ -414,39 +502,12 @@ namespace QEQ.Models
             {
                 int id = Convert.ToInt32(DataReader["id"]);
                 string Nombre = DataReader["Nombre"].ToString();
-
-                CaracteristicasXPersonaje cara = new CaracteristicasXPersonaje(id, Nombre);
-                ListaDeCarXPer.Add(cara);
-
+                Car = new CaracteristicasXPersonaje(id, Nombre);
+                ListaDeCarXPer.Add(Car);
             }
+            
             Desconectar(Conexion);
             return ListaDeCarXPer;
         }
-
-        public static void EliminarCaraXPer(int id)
-        {
-            SqlConnection Conexion = Conectar();
-            SqlCommand Consulta = Conexion.CreateCommand();
-            Consulta.CommandText = "EliminarCaraXPer";
-            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
-            Consulta.Parameters.AddWithValue("@idPersonaje", id);
-            Consulta.ExecuteNonQuery();
-
-            Desconectar(Conexion);
-        }
-
-        public static void InsertarCarPer(int idCaracteristica, int idPersonaje)
-        {
-            SqlConnection Conexion = Conectar();
-            SqlCommand Consulta = Conexion.CreateCommand();
-            Consulta.CommandText = "InsertarCarPer";
-            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
-            Consulta.Parameters.AddWithValue("@idPersonaje", idPersonaje);
-            Consulta.Parameters.AddWithValue("@idCaracteristica", idCaracteristica);
-            Consulta.ExecuteNonQuery();
-
-            Desconectar(Conexion);
-        }
-
     }
 }

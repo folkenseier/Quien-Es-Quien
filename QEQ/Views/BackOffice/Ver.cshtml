@@ -1,0 +1,24 @@
+﻿@using QEQ.Models
+
+@{
+    ViewBag.Title = "Ver";
+}
+<br />
+<br />
+<br />
+
+<p>@ViewBag.Categoria</p>
+<br />
+
+<h3> @ViewBag.Nombre </h3> <br />
+
+@{
+    foreach (CaracteristicasXPersonaje C in ViewBag.ListaDeCar)
+    {
+        <h3> @C.Nombre </h3> <br />
+    }
+}
+
+@Html.ActionLink("Volver", "ABMPer", "BackOffice", null, new { @class = "btn btn-default" })
+
+
