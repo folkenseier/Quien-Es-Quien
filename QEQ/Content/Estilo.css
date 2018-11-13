@@ -56,6 +56,7 @@ body {
 }
 
 .FormUsuario {
+    font-family: 'Lato', sans-serif;
     width: 190px;
     border: 1px solid green;
     border-radius: 4px;

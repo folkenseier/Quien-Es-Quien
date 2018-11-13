@@ -41,6 +41,10 @@ namespace QEQ.Controllers
         {
             return View();
         }
+        public ActionResult Instrucciones()
+        {
+            return View();
+        }
         [HttpPost]
         public ActionResult ValidarLogIn(Usuario unUsuario)
         {
@@ -64,13 +68,13 @@ namespace QEQ.Controllers
                     }
                     else
                     {
-                        return View("Index");
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                 else
                 {
                     ViewBag.Mensaje = "Usuario o contraseña erróneo";
-                    return View("Login");
+                    return View("Login", unUsuario);
                 }
 
             }
@@ -79,7 +83,7 @@ namespace QEQ.Controllers
         public ActionResult Logout()
         {
             Session["Usuario"] = null;
-            return View("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult FormRegistro()
@@ -104,18 +108,23 @@ namespace QEQ.Controllers
                     ViewBag.Mensaje = "El mail ingresado ya existe";
                     return View("FormRegistro", usuario);
                 }
-                if (PinCheck(pin))
+                if(pin != 623 && pin != null)
+                {
+                    ViewBag.Mensaje = "Pin incorrecto";
+                    return View("FormRegistro", usuario);
+                }
+                else if (PinCheck(pin))
                 {
                     usuario.EsAdmin = true;
                 }
                 if (BD.RegistrarUsuario(usuario))
                 {
-                    return View("Index","Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     ViewBag.Mensaje = "Error al cargar la base de datos, intente de nuevo mas tarde.";
-                    return View("FormRegistro");
+                    return View("FormRegistro", usuario);
                 }
             }
         }

@@ -215,6 +215,7 @@
     <Content Include="Views\BackOffice\FormularioPersonajes.cshtml" />
     <Content Include="Views\Home\Contacto.cshtml" />
     <Content Include="Views\BackOffice\RelacionCarXPer.cshtml" />
+    <Content Include="Views\Home\Instrucciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
