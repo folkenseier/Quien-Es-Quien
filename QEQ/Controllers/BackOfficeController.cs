@@ -320,6 +320,8 @@ namespace QEQ.Controllers
                     }
                     else
                     {
+                        ViewBag.ListCate = BD.ListarCategorias();
+                        ViewBag.Enable = new { };
                         return View("FormularioPersonajes", P);
                     }
 
@@ -342,6 +344,9 @@ namespace QEQ.Controllers
                     }
                     else
                     {
+                        P = BD.ObtenerPersonaje(P.id);
+                        ViewBag.ListCate = BD.ListarCategorias();
+                        ViewBag.Enable = new { };
                         return View("FormularioPersonajes", P);
                     }
 

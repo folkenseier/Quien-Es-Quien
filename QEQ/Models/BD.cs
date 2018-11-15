@@ -399,6 +399,30 @@ namespace QEQ.Models
             Desconectar(Conexion);
         }
 
+        public static List<Personajes> ListarPersonajesXCategoria(int idCategoria)
+        {
+            List<Personajes> ListaDePersonajes = new List<Personajes>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ListarPersonajesXCategoria";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@idCategoria", idCategoria);
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            while (DataReader.Read())
+            {
+                int id = Convert.ToInt32(DataReader["id"]);
+                string Nombre = DataReader["Nombre"].ToString();
+                int fkCategoria = Convert.ToInt32(DataReader["fkCategoria"]);
+
+
+                Personajes pers = new Personajes(id, Nombre, fkCategoria);
+                ListaDePersonajes.Add(pers);
+
+            }
+            Desconectar(Conexion);
+            return ListaDePersonajes;
+        }
+
         //------------------------------------------------------------------------------------------------------------------------------
 
         //----------------------------------------CaracteristicasPorPersonaje-------------------------------------------------------------------------------

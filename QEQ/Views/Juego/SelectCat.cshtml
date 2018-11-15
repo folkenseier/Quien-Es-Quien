@@ -1,0 +1,20 @@
+﻿@using QEQ.Models
+
+@{
+    ViewBag.Title = "SelectCat";
+}
+<br />
+<br />
+@using (Html.BeginForm("SelectPerXCate", "Juego",FormMethod.Post))
+{
+    <select name=“idCategorias”>
+        @{
+            foreach (Categorias C in ViewBag.ListCate)
+            {
+                <option value="@C.id">@C.Nombre</option>
+            }
+        }
+    </select>
+    <br/>
+    <input type="submit" value="Siguiente">
+}

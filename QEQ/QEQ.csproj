@@ -219,6 +219,7 @@
     <Content Include="Views\BackOffice\Ver.cshtml" />
     <Content Include="Views\Home\Instrucciones.cshtml" />
     <Content Include="Views\Juego\Inicio.cshtml" />
+    <Content Include="Views\Juego\SelectCat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
