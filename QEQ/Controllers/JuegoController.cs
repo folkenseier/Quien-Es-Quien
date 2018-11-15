@@ -10,7 +10,7 @@ namespace QEQ.Controllers
     public class JuegoController : Controller
     {
         // GET: Juego
-        public ActionResult Inicio()
+        public ActionResult Index()
         {
             return View();
         }
@@ -40,7 +40,16 @@ namespace QEQ.Controllers
                 Pers = BD.ListarPersonajes();
             }
             ViewBag.ListaDePersonajes = Pers;
+
+		}
+			/*
+        [HttpGet]
+        public ActionResult SelectCat(string jugador)
+        {
+            Session["jugador"] = jugador;
+
             return View();
         }
+		*/
     }
 }

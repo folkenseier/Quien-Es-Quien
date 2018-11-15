@@ -1,0 +1,32 @@
+﻿@using QEQ.Models;
+@{
+    ViewBag.Title = "Inicio";
+    var user = Session["Usuario"] as Usuario;
+}
+<link rel="stylesheet" type="text/css" href="~/Content/Estilo.css" />
+<h2>Seleccionar modo de juego</h2>
+
+<div style=" text-align: center">
+    <h4 class="btn btn-default MenuBtn">
+        @Html.ActionLink("Invitado", "SelectCat", new { jugador = "inv" })
+    </h4>
+
+    <script>
+        $(Document).ready(function () {
+            if (user === null) {
+                $("#points").addClass("block");
+                $("#p").hover("Inicie Sesion");
+            };
+
+
+        });
+    </script>
+    <div id="p">
+        <h4 class="btn btn-default MenuBtn" id="points">
+            @Html.ActionLink("Por Puntos", "SelectCat", new { jugador = "usr" })
+        </h4>
+    </div>
+
+
+
+</div>
