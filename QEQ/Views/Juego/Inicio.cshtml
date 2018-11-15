@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Inicio";
+}
+
+<h2>Seleccionar modo de juego</h2>
+
+<h4> 
+    @Html.ActionLink("Invitado", "SelectCat", new { jugador = "inv" })
+</h4>
+
+<h4>
+    @Html.ActionLink("Por Puntos", "SelectCat", new { jugador = "usr" })"
+</h4>
+
+
+
