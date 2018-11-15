@@ -9,8 +9,14 @@ namespace QEQ.Controllers
     public class JuegoController : Controller
     {
         // GET: Juego
-        public ActionResult Inicio()
+        public ActionResult Index()
         {
+            return View();
+        }
+        [HttpGet]
+        public ActionResult SelectCat(string jugador)
+        {
+            Session["jugador"] = jugador;
             return View();
         }
     }
