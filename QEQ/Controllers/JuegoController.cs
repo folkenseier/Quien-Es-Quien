@@ -22,6 +22,7 @@ namespace QEQ.Controllers
             List<Categorias> ListCategorias = new List<Categorias>();
             ListCate = BD.ListarCategorias();
             ListCate.Add(C);
+            ListCate = ListCate.OrderBy(x => x.id).ToList();
 
             ViewBag.ListCate = ListCate;
 
@@ -40,7 +41,7 @@ namespace QEQ.Controllers
                 Pers = BD.ListarPersonajes();
             }
             ViewBag.ListaDePersonajes = Pers;
-
+            return View ();
 		}
 			/*
         [HttpGet]

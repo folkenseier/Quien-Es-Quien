@@ -13,6 +13,7 @@
     @Html.HiddenFor(X => X.id)
     <p>Nombre:</p> @Html.TextBoxFor(X => X.Nombre, (object)ViewBag.Enable) @Html.ValidationMessageFor(X => X.Nombre)<br /><br />
     @Html.DropDownListFor(x => x.fkCategoria, new SelectList(ViewBag.ListCate, "id", "Nombre"), (object)ViewBag.Enable)<br /><br />
+    <p>Imagen:</p> @Html.TextBoxFor(X => X.Imagen, (object)ViewBag.Enable) @Html.ValidationMessageFor(X => X.Imagen)<br /><br />
 
     <input type="submit" value="Siguiente">
 }

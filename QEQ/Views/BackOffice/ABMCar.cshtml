@@ -12,8 +12,8 @@
     $(document).ready(function () {
         $("#myInput").on("keyup", function () {
             var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            $(".Nombre").filter(function () {
+                $("#myTable tr").toggle($("#myTable tr").text().toLowerCase().indexOf(value) > -1)
             });
         });
     });
@@ -36,7 +36,7 @@
                 foreach (Caracteristicas cara in ViewBag.ListCara)
                 {
                     <tr>
-                        <td>@cara.Nombre</td>
+                        <td class="Nombre">@cara.Nombre</td>
                         <td>@Html.ActionLink("Eliminar", "GestionCaracteristicas", "BackOffice", new { Accion = "Eliminar", id = cara.id }, null)</td>
                         <td>@Html.ActionLink("Modificar", "GestionCaracteristicas", "BackOffice", new { Accion = "Modificar", id = cara.id }, null)</td>
                         <td>@Html.ActionLink("Ver", "GestionCaracteristicas", "BackOffice", new { Accion = "Ver", id = cara.id }, null)</td>
