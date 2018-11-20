@@ -31,17 +31,18 @@ namespace QEQ.Controllers
         }
 
         [HttpPost]
-        public ActionResult SelectPerXCate(int id = 0)
+        public ActionResult SelectPerXCate(int idCategorias = 0)
         {
             List<Personajes> Pers = new List<Personajes>();
-            if (id != 0)
+            if (idCategorias != 0)
             {
-                Pers = BD.ListarPersonajesXCategoria(id);
+                Pers = BD.ListarPersonajesXCategoria(idCategorias);
             }
             else
             {
                 Pers = BD.ListarPersonajes();
             }
+            Session["ListaPersonajes"] = Pers;
             ViewBag.ListaDePersonajes = Pers;
             return View();
 

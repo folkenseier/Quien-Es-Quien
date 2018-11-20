@@ -4,11 +4,37 @@
     ViewBag.Title = "SelectPerXCate";
     List<QEQ.Models.Personajes> lPersonajes = ViewBag.ListaDePersonajes;
 }
-
+<link rel="stylesheet" type="text/css" href="~/Content/Estilo.css" />
 <h2>SelectPerXCate</h2>
-@{ 
-    foreach(var p in lPersonajes)
-    {
 
+@{
+    foreach (Personajes p in lPersonajes)
+    {
+        <div class="Card">
+
+           <div id="photo"><img src="@p.Imagen" /></div> 
+            <p>@p.Nombre</p>
+        </div>
+        
+                
+     
     }
 }
+
+
+<!--
+    <table>
+    <tr>
+        <td>
+            <p>Nombre</p>
+        </td>
+        <td>
+            <p>Imagen</p>
+        </td>
+    </tr>
+
+
+</table>
+
+
+-->

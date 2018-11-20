@@ -307,7 +307,7 @@ namespace QEQ.Controllers
                         List<CaracteristicasXPersonaje> ListaDeCaracteristicas = new List<CaracteristicasXPersonaje>();
 
 
-                        BD.InsertarPersonajes(P.Nombre, P.fkCategoria);
+                        BD.InsertarPersonajes(P.Nombre, P.fkCategoria,P.Imagen);
                         ListaDeCaracteristicas = BD.ListarCarID();
 
                         ViewBag.ListaCar = ListaDeCaracteristicas;
