@@ -11,20 +11,17 @@
         @Html.ActionLink("Invitado", "SelectCat", new { jugador = "inv" })
     </h4>
 
-    <script>
-        $(Document).ready(function () {
-            if (user === null) {
-                $("#points").addClass("block");
-                $("#p").hover("Inicie Sesion");
-            };
-
-
-        });
-    </script>
+ 
     <div id="p">
-        <h4 class="btn btn-default MenuBtn" id="points">
-            @Html.ActionLink("Por Puntos", "SelectCat", new { jugador = "usr" })
-        </h4>
+        @{
+            if (Session["Usuario"] == null)
+            {
+                <h4 class="btn btn-default MenuBtn" id="points">
+                    @Html.ActionLink("Por Puntos", "SelectCat", new { jugador = "usr", })
+                </h4>
+            }
+        }
+
     </div>
 
 
