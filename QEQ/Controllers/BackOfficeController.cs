@@ -283,6 +283,7 @@ namespace QEQ.Controllers
                     ViewBag.ListaDeCar = ListaDeCar;
                     ViewBag.Categoria = Cate.Nombre;
                     ViewBag.Nombre = Per.Nombre;
+                    ViewBag.Imagen = Per.Imagen;
                     return View("Ver");
 
 
@@ -377,7 +378,15 @@ namespace QEQ.Controllers
             ViewBag.Atributo = "personaje";
             ViewBag.ActionResult = "ABMPer";
 
-            BD.InsertarCarPer(idCar, idPer);
+            if(idCar is null)
+            {
+               
+            }
+            else
+            {
+                BD.InsertarCarPer(idCar, idPer);
+            }
+
             switch (Accion)
             {
                 case "Insertar":
