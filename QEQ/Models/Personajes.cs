@@ -11,12 +11,14 @@ namespace QEQ.Models
         private int _id;
         private string _Nombre;
         private int _fkCategoria;
+        private string _Imagen;
 
-        public Personajes(int id, string Nombre, int fkCategoria)
+        public Personajes(int id, string Nombre, int fkCategoria, string Imagen)
         {
             _id = id;
             _Nombre = Nombre;
             _fkCategoria = fkCategoria;
+            _Imagen = Imagen;
         }
 
         public Personajes()
@@ -30,5 +32,8 @@ namespace QEQ.Models
         public string Nombre { get => _Nombre; set => _Nombre = value; }
 
         public int fkCategoria { get => _fkCategoria; set => _fkCategoria = value; }
+
+        [Required(ErrorMessage = "El campo no puede estar vacío")]
+        public string Imagen { get => _Imagen; set => _Imagen = value; }
     }
 }

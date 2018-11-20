@@ -329,9 +329,10 @@ namespace QEQ.Models
                 int id = Convert.ToInt32(DataReader["id"]);
                 string Nombre = DataReader["Nombre"].ToString();
                 int fkCategoria = Convert.ToInt32(DataReader["fkCategoria"]);
+                string Imagen = DataReader["Imagen"].ToString();
 
 
-                Personajes pers = new Personajes(id, Nombre, fkCategoria);
+                Personajes pers = new Personajes(id, Nombre, fkCategoria, Imagen);
                 ListaDePersonajes.Add(pers);
 
             }
@@ -353,14 +354,15 @@ namespace QEQ.Models
                 int id = Convert.ToInt32(DataReader["id"]);
                 string Nombre = DataReader["Nombre"].ToString();
                 int fkCategoria = Convert.ToInt32(DataReader["fkCategoria"]);
+                string Imagen = DataReader["Imagen"].ToString();
 
-                pers = new Personajes(id, Nombre, fkCategoria);
+                pers = new Personajes(id, Nombre, fkCategoria, Imagen);
             }
             Desconectar(Conexion);
             return pers;
         }
 
-        public static void InsertarPersonajes(string Nombre, int fkCategoria)
+        public static void InsertarPersonajes(string Nombre, int fkCategoria, string Imagen)
         {
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
@@ -368,6 +370,7 @@ namespace QEQ.Models
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@Nombre", Nombre);
             Consulta.Parameters.AddWithValue("@idCategoria", fkCategoria);
+            Consulta.Parameters.AddWithValue("@Imagen", Imagen);
             Consulta.ExecuteNonQuery();
 
             Desconectar(Conexion);
@@ -394,6 +397,7 @@ namespace QEQ.Models
             Consulta.Parameters.AddWithValue("@id", pers.id);
             Consulta.Parameters.AddWithValue("@Nombre", pers.Nombre);
             Consulta.Parameters.AddWithValue("@idCategoria", pers.fkCategoria);
+            Consulta.Parameters.AddWithValue("@Imagen", pers.Imagen);
             Consulta.ExecuteNonQuery();
 
             Desconectar(Conexion);
@@ -413,9 +417,10 @@ namespace QEQ.Models
                 int id = Convert.ToInt32(DataReader["id"]);
                 string Nombre = DataReader["Nombre"].ToString();
                 int fkCategoria = Convert.ToInt32(DataReader["fkCategoria"]);
+                string Imagen = DataReader["Imagen"].ToString();
 
 
-                Personajes pers = new Personajes(id, Nombre, fkCategoria);
+                Personajes pers = new Personajes(id, Nombre, fkCategoria, Imagen);
                 ListaDePersonajes.Add(pers);
 
             }
