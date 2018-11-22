@@ -5,9 +5,9 @@
 }
 <br />
 <br />
-@using (Html.BeginForm("SelectPerXCate", "Juego",FormMethod.Post))
+@using (Html.BeginForm("SelectPerXCate", "Juego", FormMethod.Post))
 {
-    <select name=“idCategorias”>
+    <select name="idCategorias">
         @{
             foreach (Categorias C in ViewBag.ListCate)
             {

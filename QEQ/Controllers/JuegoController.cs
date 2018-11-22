@@ -32,7 +32,7 @@ namespace QEQ.Controllers
         }
 
         [HttpPost]
-        public ActionResult SelectPerXCate(int idCategorias = 0)
+        public ActionResult SelectPerXCate(int idCategorias)
         {
             List<Personajes> Pers = new List<Personajes>();
             if (idCategorias != 0)
