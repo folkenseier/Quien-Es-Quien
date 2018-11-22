@@ -14,7 +14,7 @@
  
     <div id="p">
         @{
-            if (Session["Usuario"] == null)
+            if (Session["Usuario"] != null)
             {
                 <h4 class="btn btn-default MenuBtn" id="points">
                     @Html.ActionLink("Por Puntos", "SelectCat", new { jugador = "usr", })
