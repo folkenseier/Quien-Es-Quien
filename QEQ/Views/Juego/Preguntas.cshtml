@@ -1,9 +1,12 @@
 ﻿@using QEQ.Models;
 @{
     ViewBag.Title = "Preguntas";
+    List<Personajes> personajes = Session["ListaPersonajes"] as List<Personajes>;
 }
 
-<h2>Preguntas</h2>
+<h2>Preguntas</h2> <br /> <br />  
+<h3 style="float:right">$@Session["Puntaje"]</h3>
+<h3> Te quedan @personajes.Count</h3>
 
 @using (Html.BeginForm("Respuestas", "Juego", FormMethod.Post))
 {

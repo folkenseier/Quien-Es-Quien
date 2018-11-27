@@ -33,6 +33,12 @@ namespace QEQ.Controllers
 
             return View();
         }
+        public ActionResult VerPersonajes()
+        {
+            Session["Puntaje"] = (Convert.ToInt32(Session["Puntaje"]) / 2); 
+
+            return View("SelectPerXCate");
+        }
 
         [HttpPost]
         public ActionResult SelectPerXCate(int idCategorias)
@@ -75,7 +81,31 @@ namespace QEQ.Controllers
             int valor = BD.ObtenerCaracteristica(id).ValorPregunta;
             Session["Puntaje"] = Convert.ToInt32(Session["Puntaje"]) - valor;
             var ListPersonajes = BD.ListarPersonajesXCaracteristica(id);
+            if (ListPersonajes.Contains(Session["PersonajeElegido"]))
+            {
+                List<Personajes> PersonajesQueSeQuedan = new List<Personajes>();
+                List<Personajes> personajesActuales = Session["ListaPersonajes"] as List<Personajes>;
+                foreach (Personajes P in ListPersonajes)
+                {
+                    if (personajesActuales.Contains(P))
+                    {
+                        PersonajesQueSeQuedan.Add(P);
+                    }
+                }
+                Session["ListaPersonajes"] = PersonajesQueSeQuedan;
+                ViewBag.Mensaje = "Si";
+            }
+            else
+            {
+                List<Personajes> personajesActuales = Session["ListaPersonajes"] as List<Personajes>;
+                foreach(var P in ListPersonajes)
+                {
+                    personajesActuales.Remove(P);
+                }
+                ViewBag.Mensaje = "No";
+                Session["ListaPersonajes"] = personajesActuales;
 
+            }
 
             return View();
         }

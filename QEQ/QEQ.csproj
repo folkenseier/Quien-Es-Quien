@@ -221,11 +221,8 @@
     <Content Include="Views\Juego\SelectCat.cshtml" />
     <Content Include="Views\Juego\Index.cshtml" />
     <Content Include="Views\Juego\SelectPerXCate.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Juego\Preguntas.cshtml" />
-=======
-    <Content Include="Views\Juego\Resultado.cshtml" />
->>>>>>> 006778ab12024b958c35c60a7684377a57fa3f1b
+    <Content Include="Views\Juego\Respuesta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
