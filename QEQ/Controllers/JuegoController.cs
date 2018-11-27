@@ -35,8 +35,8 @@ namespace QEQ.Controllers
         }
         public ActionResult VerPersonajes()
         {
-            Session["Puntaje"] = (Convert.ToInt32(Session["Puntaje"]) / 2); 
-
+            Session["Puntaje"] = (Convert.ToInt32(Session["Puntaje"]) / 2);
+            ViewBag.ListaDePersonajes = Session["ListaPersonajes"];
             return View("SelectPerXCate");
         }
 
@@ -119,6 +119,5 @@ namespace QEQ.Controllers
     }
     */
 
-		}
     }
 }
