@@ -108,7 +108,7 @@ namespace QEQ.Controllers
                     ViewBag.Mensaje = "El mail ingresado ya existe";
                     return View("FormRegistro", usuario);
                 }
-                if(pin != 623 && pin != null)
+                if (pin != 623 && pin != null)
                 {
                     ViewBag.Mensaje = "Pin incorrecto";
                     return View("FormRegistro", usuario);
@@ -195,6 +195,7 @@ namespace QEQ.Controllers
             return table;
 
         }
+
 
     }
 

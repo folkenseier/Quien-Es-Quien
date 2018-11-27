@@ -19,6 +19,9 @@ namespace QEQ.Controllers
         public ActionResult SelectCat(string jugador)
         {
             Session["modo"] = jugador;
+
+            Session["Puntaje"] = 1000000;
+
             Categorias C = new Categorias(0, "Todas");
             List<Categorias> ListCate = new List<Categorias>();
             List<Categorias> ListCategorias = new List<Categorias>();
@@ -47,15 +50,33 @@ namespace QEQ.Controllers
             ViewBag.ListaDePersonajes = Pers;
             return View();
 
-		}
-			/*
-        [HttpGet]
-        public ActionResult SelectCat(string jugador)
+        }
+        [HttpPost]
+        public ActionResult Preguntas()
         {
-            Session["jugador"] = jugador;
+            ViewBag.Preguntas = BD.ListarPreguntas();
+
+
 
             return View();
         }
-		*/
+        [HttpPost]
+        public ActionResult Respuesta(int id) {
+            int valor = BD.ObtenerCaracteristica(id).ValorPregunta;
+            Session["Puntaje"] = Convert.ToInt32(Session["Puntaje"]) - valor;
+            var ListPersonajes = BD.ListarPersonajesXCaracteristica(id);
+
+
+            return View();
+        }
+        /*
+    [HttpGet]
+    public ActionResult SelectCat(string jugador)
+    {
+        Session["jugador"] = jugador;
+
+        return View();
+    }
+    */
     }
 }

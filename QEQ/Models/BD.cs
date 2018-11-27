@@ -36,7 +36,7 @@ namespace QEQ.Models
             {
                 int id = Convert.ToInt32(DataReader["id"]);
                 string Nombre = DataReader["Nombre"].ToString();
-                
+
 
                 Categorias cate = new Categorias(id, Nombre);
                 ListaDeCategorias.Add(cate);
@@ -130,8 +130,8 @@ namespace QEQ.Models
 
 
 
-                 UnUsuario = new Usuario(id, Nombre, Mail, Contraseña, EsAdmin, Puntaje, Record);
-               
+                UnUsuario = new Usuario(id, Nombre, Mail, Contraseña, EsAdmin, Puntaje, Record);
+
 
             }
             Desconectar(Conexion);
@@ -139,7 +139,7 @@ namespace QEQ.Models
         }
         public static bool BuscarPorMail(string Email)
         {
-            
+
             SqlConnection Conexion = Conectar();
             SqlCommand Consulta = Conexion.CreateCommand();
             Consulta.CommandText = "BuscarPorMail";
@@ -185,12 +185,12 @@ namespace QEQ.Models
             {
                 Consulta.ExecuteNonQuery();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
             return true;
-            
+
         }
 
         public static List<Usuario> ListarUsuarios()
@@ -218,7 +218,7 @@ namespace QEQ.Models
             }
             return Usuarios;
         }
-        
+
 
 
         //----------------------------------------------------------------------------------------------------------------------------------
@@ -247,6 +247,28 @@ namespace QEQ.Models
             }
             Desconectar(Conexion);
             return ListaDeCaracteristicas;
+        }
+        public static List< Caracteristicas > ListarPreguntas ()
+        {
+            List<Caracteristicas> listaPreguntas = new List<Caracteristicas>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ListarCaracteristicas";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            while (DataReader.Read())
+            {
+                int ID = Convert.ToInt32( DataReader["id"]);
+                int Valor = Convert.ToInt32( DataReader["ValorPregunta"]);
+                string TextoPregunta = DataReader["TextoPregunta"].ToString();
+                Caracteristicas car = new Caracteristicas();
+                car.id = ID;
+                car.TextoPregunta = TextoPregunta;
+                car.ValorPregunta = Valor;
+                listaPreguntas.Add(car);
+            }
+            Desconectar(Conexion);
+            return listaPreguntas;
         }
 
         public static Caracteristicas ObtenerCaracteristica(int Id)
@@ -411,6 +433,31 @@ namespace QEQ.Models
             Consulta.CommandText = "ListarPersonajesXCategoria";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@idCategoria", idCategoria);
+            SqlDataReader DataReader = Consulta.ExecuteReader();
+            while (DataReader.Read())
+            {
+                int id = Convert.ToInt32(DataReader["id"]);
+                string Nombre = DataReader["Nombre"].ToString();
+                int fkCategoria = Convert.ToInt32(DataReader["fkCategoria"]);
+                string Imagen = DataReader["Imagen"].ToString();
+
+
+                Personajes pers = new Personajes(id, Nombre, fkCategoria, Imagen);
+                ListaDePersonajes.Add(pers);
+
+            }
+            Desconectar(Conexion);
+            return ListaDePersonajes;
+        }
+
+        public static List<Personajes> ListarPersonajesXCaracteristica(int idCaracteristica)
+        {
+            List<Personajes> ListaDePersonajes = new List<Personajes>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ListarPersonajesXCaracteristica";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+            Consulta.Parameters.AddWithValue("@idcar", idCaracteristica);
             SqlDataReader DataReader = Consulta.ExecuteReader();
             while (DataReader.Read())
             {

@@ -1,0 +1,19 @@
+﻿@using QEQ.Models;
+@{
+    ViewBag.Title = "Preguntas";
+}
+
+<h2>Preguntas</h2>
+
+@using (Html.BeginForm("Respuestas", "Juego", FormMethod.Post))
+{
+    @{
+        foreach (Caracteristicas i in ViewBag.Preguntas)
+        {
+            <input type="radio" name="pregunta" value="@i.id" /> @i.TextoPregunta @i.ValorPregunta
+        }
+
+    }
+}
+
+

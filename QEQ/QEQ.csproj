@@ -221,6 +221,7 @@
     <Content Include="Views\Juego\SelectCat.cshtml" />
     <Content Include="Views\Juego\Index.cshtml" />
     <Content Include="Views\Juego\SelectPerXCate.cshtml" />
+    <Content Include="Views\Juego\Preguntas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,9 +5,10 @@
     List<QEQ.Models.Personajes> lPersonajes = ViewBag.ListaDePersonajes;
 }
 <link rel="stylesheet" type="text/css" href="~/Content/Estilo.css" />
-<h2>SelectPerXCate</h2>
-
+<h2>Seleccionar Personaje</h2>
+@using (Html.BeginForm("Preguntas","Juego", FormMethod.Post))
 @{
+    <input type="submit" value="continuar"/>
     foreach (Personajes p in lPersonajes)
     {
         <div class="Card">
@@ -15,10 +16,11 @@
            <div id="photo"><img src="@p.Imagen" /></div> 
             <p>@p.Nombre</p>
         </div>
-        
-                
-     
+
+
+
     }
+    
 }
 
 
