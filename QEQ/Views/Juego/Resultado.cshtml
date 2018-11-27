@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Resultado";
+}
+
+<p>Mostrar correcto o no</p><br />
+<p>Mostrar puntaje restante</p><br />
+<p>Mostrar cantidad de personajes restantes</p><br />
+
+<h3>
+    @Html.ActionLink("Ver personajes", "(accionresult para volver a la view)", "Juego", null, new { @class = "btn MenuBtn" })
+    Esto te descontará puntos
+</h3>
+
+
+<h3>
+    @Html.ActionLink("Siguiente pregunta", "(accionresult para volver a realizar una pregunta)", "Juego", null, new { @class = "btn MenuBtn" })
+</h3>
+
+
+<h3>
+    @Html.ActionLink("Arriesgar", "(accionresult para arriesgar un personaje)", "Juego", null, new { @class = "btn MenuBtn" })
+</h3>
+

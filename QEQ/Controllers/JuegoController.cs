@@ -44,18 +44,19 @@ namespace QEQ.Controllers
                 Pers = BD.ListarPersonajes();
             }
             Session["ListaPersonajes"] = Pers;
+
+            List<int> ListaIDPersonajes = new List<int>();
+            ListaIDPersonajes = BD.ListarIDPersonajes();
+
+            Random rnd = new Random();
+            int PosiciónElegida = rnd.Next(0, ListaIDPersonajes.Count-1);
+            int PersonajeElegido = ListaIDPersonajes[PosiciónElegida];
+
+            Session["PersonajeElegido"] = PersonajeElegido;
+
             ViewBag.ListaDePersonajes = Pers;
             return View();
 
 		}
-			/*
-        [HttpGet]
-        public ActionResult SelectCat(string jugador)
-        {
-            Session["jugador"] = jugador;
-
-            return View();
-        }
-		*/
     }
 }
