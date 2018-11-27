@@ -47,9 +47,20 @@ namespace QEQ.Controllers
                 Pers = BD.ListarPersonajes();
             }
             Session["ListaPersonajes"] = Pers;
+
+            List<int> ListaIDPersonajes = new List<int>();
+            ListaIDPersonajes = BD.ListarIDPersonajes();
+
+            Random rnd = new Random();
+            int PosiciónElegida = rnd.Next(0, ListaIDPersonajes.Count-1);
+            int PersonajeElegido = ListaIDPersonajes[PosiciónElegida];
+
+            Session["PersonajeElegido"] = PersonajeElegido;
+
             ViewBag.ListaDePersonajes = Pers;
             return View();
 
+<<<<<<< HEAD
         }
         [HttpPost]
         public ActionResult Preguntas()
@@ -78,5 +89,8 @@ namespace QEQ.Controllers
         return View();
     }
     */
+=======
+		}
+>>>>>>> 006778ab12024b958c35c60a7684377a57fa3f1b
     }
 }

@@ -450,6 +450,7 @@ namespace QEQ.Models
             return ListaDePersonajes;
         }
 
+<<<<<<< HEAD
         public static List<Personajes> ListarPersonajesXCaracteristica(int idCaracteristica)
         {
             List<Personajes> ListaDePersonajes = new List<Personajes>();
@@ -458,10 +459,20 @@ namespace QEQ.Models
             Consulta.CommandText = "ListarPersonajesXCaracteristica";
             Consulta.CommandType = System.Data.CommandType.StoredProcedure;
             Consulta.Parameters.AddWithValue("@idcar", idCaracteristica);
+=======
+        public static List<int> ListarIDPersonajes()
+        {
+            List<int> ListaDeIDPersonajes = new List<int>();
+            SqlConnection Conexion = Conectar();
+            SqlCommand Consulta = Conexion.CreateCommand();
+            Consulta.CommandText = "ListarIDPersonajes";
+            Consulta.CommandType = System.Data.CommandType.StoredProcedure;
+>>>>>>> 006778ab12024b958c35c60a7684377a57fa3f1b
             SqlDataReader DataReader = Consulta.ExecuteReader();
             while (DataReader.Read())
             {
                 int id = Convert.ToInt32(DataReader["id"]);
+<<<<<<< HEAD
                 string Nombre = DataReader["Nombre"].ToString();
                 int fkCategoria = Convert.ToInt32(DataReader["fkCategoria"]);
                 string Imagen = DataReader["Imagen"].ToString();
@@ -473,6 +484,14 @@ namespace QEQ.Models
             }
             Desconectar(Conexion);
             return ListaDePersonajes;
+=======
+
+                ListaDeIDPersonajes.Add(id);
+
+            }
+            Desconectar(Conexion);
+            return ListaDeIDPersonajes;
+>>>>>>> 006778ab12024b958c35c60a7684377a57fa3f1b
         }
 
         //------------------------------------------------------------------------------------------------------------------------------
