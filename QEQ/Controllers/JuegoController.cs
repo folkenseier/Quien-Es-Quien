@@ -79,35 +79,45 @@ namespace QEQ.Controllers
         [HttpPost]
         public ActionResult Respuesta(int id) {
             int valor = BD.ObtenerCaracteristica(id).ValorPregunta;
-            Session["Puntaje"] = Convert.ToInt32(Session["Puntaje"]) - valor;
-            var ListPersonajes = BD.ListarPersonajesXCaracteristica(id);
-            if (ListPersonajes.Contains(Session["PersonajeElegido"]))
+            if (valor > Convert.ToInt32(Session["Puntaje"]))
             {
-                List<Personajes> PersonajesQueSeQuedan = new List<Personajes>();
-                List<Personajes> personajesActuales = Session["ListaPersonajes"] as List<Personajes>;
-                foreach (Personajes P in ListPersonajes)
-                {
-                    if (personajesActuales.Contains(P))
-                    {
-                        PersonajesQueSeQuedan.Add(P);
-                    }
-                }
-                Session["ListaPersonajes"] = PersonajesQueSeQuedan;
-                ViewBag.Mensaje = "Si";
+                ViewBag.Mensaje = "No tienes los infocoins necesarios para hacer la pregunta";
+                return RedirectToAction("Preguntas", "Juego");
             }
             else
             {
-                List<Personajes> personajesActuales = Session["ListaPersonajes"] as List<Personajes>;
-                foreach(var P in ListPersonajes)
+
+
+                Session["Puntaje"] = Convert.ToInt32(Session["Puntaje"]) - valor;
+                var ListPersonajes = BD.ListarPersonajesXCaracteristica(id);
+                if (ListPersonajes.Contains(Session["PersonajeElegido"]))
                 {
-                    personajesActuales.Remove(P);
+                    List<Personajes> PersonajesQueSeQuedan = new List<Personajes>();
+                    List<Personajes> personajesActuales = Session["ListaPersonajes"] as List<Personajes>;
+                    foreach (Personajes P in ListPersonajes)
+                    {
+                        if (personajesActuales.Contains(P))
+                        {
+                            PersonajesQueSeQuedan.Add(P);
+                        }
+                    }
+                    Session["ListaPersonajes"] = PersonajesQueSeQuedan;
+                    ViewBag.Mensaje = "Si";
                 }
-                ViewBag.Mensaje = "No";
-                Session["ListaPersonajes"] = personajesActuales;
+                else
+                {
+                    List<Personajes> personajesActuales = Session["ListaPersonajes"] as List<Personajes>;
+                    foreach (var P in ListPersonajes)
+                    {
+                        personajesActuales.Remove(P);
+                    }
+                    ViewBag.Mensaje = "No";
+                    Session["ListaPersonajes"] = personajesActuales;
 
+                }
+
+                return View();
             }
-
-            return View();
         }
         /*
     [HttpGet]
