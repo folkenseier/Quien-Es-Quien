@@ -9,6 +9,8 @@ namespace QEQ.Controllers
 {
     public class JuegoController : Controller
     {
+  
+     
         // GET: Juego
         public ActionResult Index()
         {
@@ -70,6 +72,10 @@ namespace QEQ.Controllers
         [HttpPost]
         public ActionResult Preguntas()
         {
+            if (Convert.ToInt32(Session["Puntaje"]) <= 0)
+            {
+                return View("Perdiste");
+            }
             ViewBag.Preguntas = BD.ListarPreguntas();
 
 
