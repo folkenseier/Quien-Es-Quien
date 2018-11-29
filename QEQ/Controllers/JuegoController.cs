@@ -9,6 +9,8 @@ namespace QEQ.Controllers
 {
     public class JuegoController : Controller
     {
+  
+     
         // GET: Juego
         public ActionResult Index()
         {
@@ -71,6 +73,10 @@ namespace QEQ.Controllers
         [HttpPost]
         public ActionResult Preguntas()
         {
+            if (Convert.ToInt32(Session["Puntaje"]) <= 0)
+            {
+                return View("Perdiste");
+            }
             ViewBag.Preguntas = BD.ListarPreguntas();
 
 
@@ -81,32 +87,44 @@ namespace QEQ.Controllers
         [HttpPost]
         public ActionResult Respuesta(int id) {
             int valor = BD.ObtenerCaracteristica(id).ValorPregunta;
-            Session["Puntaje"] = Convert.ToInt32(Session["Puntaje"]) - valor;
-            var ListPersonajes = BD.ListarPersonajesXCaracteristica(id);
-            if (ListPersonajes.Contains(Session["PersonajeElegido"]))
+            if (valor > Convert.ToInt32(Session["Puntaje"]))
             {
-                List<Personajes> PersonajesQueSeQuedan = new List<Personajes>();
-                List<Personajes> personajesActuales = Session["ListaPersonajes"] as List<Personajes>;
-                foreach (Personajes P in ListPersonajes)
-                {
-                    if (personajesActuales.Contains(P))
-                    {
-                        PersonajesQueSeQuedan.Add(P);
-                    }
-                }
-                Session["ListaPersonajes"] = PersonajesQueSeQuedan;
-                ViewBag.Mensaje = "Si";
+                ViewBag.Mensaje = "No tienes los infocoins necesarios para hacer la pregunta";
+                return RedirectToAction("Preguntas", "Juego");
             }
             else
             {
-                List<Personajes> personajesActuales = Session["ListaPersonajes"] as List<Personajes>;
-                foreach(var P in ListPersonajes)
-                {
-                    personajesActuales.Remove(P);
-                }
-                ViewBag.Mensaje = "No";
-                Session["ListaPersonajes"] = personajesActuales;
 
+
+                Session["Puntaje"] = Convert.ToInt32(Session["Puntaje"]) - valor;
+                var ListPersonajes = BD.ListarPersonajesXCaracteristica(id);
+                if (ListPersonajes.Contains(Session["PersonajeElegido"]))
+                {
+                    List<Personajes> PersonajesQueSeQuedan = new List<Personajes>();
+                    List<Personajes> personajesActuales = Session["ListaPersonajes"] as List<Personajes>;
+                    foreach (Personajes P in ListPersonajes)
+                    {
+                        if (personajesActuales.Contains(P))
+                        {
+                            PersonajesQueSeQuedan.Add(P);
+                        }
+                    }
+                    Session["ListaPersonajes"] = PersonajesQueSeQuedan;
+                    ViewBag.Mensaje = "Si";
+                }
+                else
+                {
+                    List<Personajes> personajesActuales = Session["ListaPersonajes"] as List<Personajes>;
+                    foreach (var P in ListPersonajes)
+                    {
+                        personajesActuales.Remove(P);
+                    }
+                    ViewBag.Mensaje = "No";
+                    Session["ListaPersonajes"] = personajesActuales;
+
+                }
+
+                return View();
             }
             string NombreCar = BD.ObtenerCaracteristica(id).Nombre;
             ViewBag.NombreCar = NombreCar;

@@ -6,28 +6,30 @@
 }
 <link rel="stylesheet" type="text/css" href="~/Content/Estilo.css" />
 
-<h2>Seleccionar Personaje</h2>
-@using (Html.BeginForm("Preguntas","Juego", FormMethod.Post))
-
-<br />
-<br />
-<br />
-@{
-    <input type="submit" value="continuar"/>
-    foreach (Personajes p in lPersonajes)
+<h2>Ver Personajes</h2>
+<div>
+    @using (Html.BeginForm("Preguntas", "Juego", FormMethod.Post))
     {
-        <div class="Card">
 
-           <div id="photo"><img src="@p.Imagen" /></div> 
-            <p>@p.Nombre</p>
-        </div>
-
+        <br />
+        <br />
+        <br />
 
 
+
+        foreach (Personajes p in lPersonajes)
+        {
+            <div class="Card">
+
+                <div id="photo"><img src="@p.Imagen" /></div>
+                <p>@p.Nombre</p>
+            </div>
+        }
+
+        <input type="submit" value="continuar" />
     }
-    
-}
 
+</div>
 
 <!--
     <table>

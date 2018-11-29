@@ -6,17 +6,20 @@
 
 <h2>Preguntas</h2> <br /> <br />  
 <h3 style="float:right">$@Session["Puntaje"]</h3>
-<h3> Te quedan @personajes.Count personajes</h3>
 
-@using (Html.BeginForm("Respuestas", "Juego", FormMethod.Post))
+<h3> Te quedan @personajes.Count personajes
+    <a href="@Url.Action("VerPersonajes", "Juego")">¿Ver?</a> </h3>
+
+
+@using (Html.BeginForm("Respuesta", "Juego", FormMethod.Post))
 {
-    @{
+    
         foreach (Caracteristicas i in ViewBag.Preguntas)
         {
-            <input type="radio" name="pregunta" value="@i.id" /> @i.TextoPregunta @i.ValorPregunta
+            <input type="radio"  name="id" value="@i.id" /> @i.TextoPregunta @i.ValorPregunta <br /> <br />
         }
 
-    }
+    <input type="submit" value="Siguiente"/>
 }
 
-
+<h2 class="MensajeError"> @ViewBag.Mensaje</h2>
