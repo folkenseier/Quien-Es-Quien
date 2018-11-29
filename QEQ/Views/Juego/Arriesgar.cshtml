@@ -1,0 +1,19 @@
+﻿@using QEQ.Models;
+@{
+    ViewBag.Title = "Arriesgar";
+}
+
+@using (Html.BeginForm("PerderGanar", "Juego", FormMethod.Post))
+{
+    <select name="idPer">
+        @{
+            foreach (Personajes P in ViewBag.ListaDePersonajes)
+            {
+                <option value="@P.id">@P.Nombre</option>
+            }
+        }
+    </select>
+    <br />
+    <input type="submit" value="Siguiente">
+}
+

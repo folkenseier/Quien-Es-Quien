@@ -33,6 +33,7 @@ namespace QEQ.Controllers
 
             return View();
         }
+
         public ActionResult VerPersonajes()
         {
             Session["Puntaje"] = (Convert.ToInt32(Session["Puntaje"]) / 2);
@@ -76,6 +77,7 @@ namespace QEQ.Controllers
 
             return View();
         }
+
         [HttpPost]
         public ActionResult Respuesta(int id) {
             int valor = BD.ObtenerCaracteristica(id).ValorPregunta;
@@ -106,18 +108,33 @@ namespace QEQ.Controllers
                 Session["ListaPersonajes"] = personajesActuales;
 
             }
+            string NombreCar = BD.ObtenerCaracteristica(id).Nombre;
+            ViewBag.NombreCar = NombreCar;
+            return View();
+        }
+
+        public ActionResult Arriesgar()
+        {
+            List<Personajes> personajes = Session["ListaPersonajes"] as List<Personajes>;
+            ViewBag.ListaDePersonajes = personajes;
 
             return View();
         }
-        /*
-    [HttpGet]
-    public ActionResult SelectCat(string jugador)
-    {
-        Session["jugador"] = jugador;
 
-        return View();
-    }
-    */
+        [HttpPost]
+        public ActionResult PerderGanar(int idPer)
+        {
+            Personajes PersonajeElegido = Session["PersonajeElegido"] as Personajes;
+
+            if(idPer == PersonajeElegido.id)
+            {
+                return View("Ganaste");
+            }
+            else
+            {
+                return View("Perdiste"); 
+            }
+        }
 
     }
 }

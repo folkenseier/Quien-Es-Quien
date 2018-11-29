@@ -1,8 +1,29 @@
-﻿
+﻿@using QEQ.Models;
 @{
     ViewBag.Title = "Respuesta";
+    var puntos = Session["Puntaje"] as int?;
+    List<Personajes> personajes = Session["ListaPersonajes"] as List<Personajes>;
 }
 
 <h2>Respuesta</h2>
 
-@ViewBag.Mensaje
+<h3>El personaje @ViewBag.Mensaje cuenta con la caracteristica de @ViewBag.NombreCar</h3>
+
+<h3>Te quedan @puntos puntos</h3>
+
+<h3> Te quedan @personajes.Count personajes</h3>
+
+<h3>
+    @Html.ActionLink("Ver personajes", "VerPersonajes", "Juego", null, new { @class = "btn MenuBtn" })
+    Esto te descontará la mitad de tus puntos
+</h3>
+
+
+<h3>
+    @Html.ActionLink("Siguiente pregunta", "Preguntas", "Juego", null, new { @class = "btn MenuBtn" })
+</h3>
+
+
+<h3>
+    @Html.ActionLink("Arriesgar", "Arriesgar", "Juego", null, new { @class = "btn MenuBtn" })
+</h3>

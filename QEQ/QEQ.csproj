@@ -223,6 +223,9 @@
     <Content Include="Views\Juego\SelectPerXCate.cshtml" />
     <Content Include="Views\Juego\Preguntas.cshtml" />
     <Content Include="Views\Juego\Respuesta.cshtml" />
+    <Content Include="Views\Juego\Arriesgar.cshtml" />
+    <Content Include="Views\Juego\Ganaste.cshtml" />
+    <Content Include="Views\Juego\Perdiste.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
