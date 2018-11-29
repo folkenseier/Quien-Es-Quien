@@ -70,7 +70,6 @@ namespace QEQ.Controllers
             return View();
         }
 		
-        [HttpPost]
         public ActionResult Preguntas()
         {
             if (Convert.ToInt32(Session["Puntaje"]) <= 0)
@@ -97,14 +96,16 @@ namespace QEQ.Controllers
 
 
                 Session["Puntaje"] = Convert.ToInt32(Session["Puntaje"]) - valor;
-                var ListPersonajes = BD.ListarPersonajesXCaracteristica(id);
-                if (ListPersonajes.Contains(Session["PersonajeElegido"]))
-                {
-                    List<Personajes> PersonajesQueSeQuedan = new List<Personajes>();
+                string NombreCar = BD.ObtenerCaracteristica(id).Nombre;
+                ViewBag.NombreCar = NombreCar;
+                var ListPersonajes = BD.ListarIDPersonajesXCaracteristica(id);
+                List<Personajes> PersonajesQueSeQuedan = new List<Personajes>();
+                if (ListPersonajes.Contains((int)Session["PersonajeElegido"]))
+                { 
                     List<Personajes> personajesActuales = Session["ListaPersonajes"] as List<Personajes>;
-                    foreach (Personajes P in ListPersonajes)
+                    foreach(Personajes P in personajesActuales)
                     {
-                        if (personajesActuales.Contains(P))
+                        if (ListPersonajes.Contains(P.id))
                         {
                             PersonajesQueSeQuedan.Add(P);
                         }
@@ -115,19 +116,20 @@ namespace QEQ.Controllers
                 else
                 {
                     List<Personajes> personajesActuales = Session["ListaPersonajes"] as List<Personajes>;
-                    foreach (var P in ListPersonajes)
+                    foreach (Personajes P in personajesActuales)
                     {
-                        personajesActuales.Remove(P);
+                        if (!ListPersonajes.Contains(P.id))
+                        {
+                            PersonajesQueSeQuedan.Add(P);
+                        }
                     }
                     ViewBag.Mensaje = "No";
-                    Session["ListaPersonajes"] = personajesActuales;
+                    Session["ListaPersonajes"] = PersonajesQueSeQuedan;
 
                 }
 
                 return View();
             }
-            string NombreCar = BD.ObtenerCaracteristica(id).Nombre;
-            ViewBag.NombreCar = NombreCar;
             return View();
         }
 
@@ -142,9 +144,9 @@ namespace QEQ.Controllers
         [HttpPost]
         public ActionResult PerderGanar(int idPer)
         {
-            Personajes PersonajeElegido = Session["PersonajeElegido"] as Personajes;
+            int PersonajeElegido = Convert.ToInt32( Session["PersonajeElegido"]);
 
-            if(idPer == PersonajeElegido.id)
+            if(idPer == PersonajeElegido)
             {
                 return View("Ganaste");
             }

@@ -8,26 +8,25 @@
 
 <h2>Ver Personajes</h2>
 <div>
-    @using (Html.BeginForm("Preguntas", "Juego", FormMethod.Post))
-    {
+    @Html.ActionLink("Siguiente pregunta", "Preguntas", "Juego", null, new { @class = "btn MenuBtn" })
+    
 
-        <br />
-        <br />
-        <br />
+    <br />
+    <br />
+    <br />
 
 
 
-        foreach (Personajes p in lPersonajes)
+    @{ foreach (Personajes p in lPersonajes)
         {
-            <div class="Card">
+    <div class="Card">
 
-                <div id="photo"><img src="@p.Imagen" /></div>
-                <p>@p.Nombre</p>
-            </div>
+        <div id="photo"><img src="@p.Imagen" /></div>
+        <p>@p.Nombre</p>
+    </div>
+            }
         }
 
-        <input type="submit" value="continuar" />
-    }
 
 </div>
 
